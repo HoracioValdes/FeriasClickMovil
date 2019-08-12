@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Módulo de Calificación de Compra</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Datos del despacho y la compra</h3>
+  <ion-list>
+    <ion-item>
+      <ion-label text-wrap>
+        <ion-text>
+          <h4>Fecha y hora del despacho: <b>{{ despacho.FECHA_HORA_DESPACHO }}</b></h4>
+        </ion-text>
+        <ion-text>
+          <h4>Nombre del repartidor: <b>{{ despacho.NOMBRE_REPARTIDOR }} {{ despacho.APELLIDOS_REPARTIDOR }}</b></h4>
+        </ion-text>
+        <ion-text>
+          <h4>Monto de la compra: <b>$ {{ despacho.MONTO_COMPRA }}</b></h4>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-textarea placeholder="Ingrese una calificación del despacho en máximo 5 palabras"
+        (ionChange)="cambioTexto( $event )" [disabled]="isReadOnly"></ion-textarea>
+    </ion-item>
+  </ion-list>
+  <h3>Lista de Productos</h3>
+  <p>Califique los productos en una escala de 1 a 10, donde 1 es pésima calidad y 10 es excelente calidad.</p>
+  <ion-list>
+    <ion-item name="lista" *ngFor="let producto of productos" style="margin-top: 10px;">
+      <ion-label>
+        <ion-text>
+          <h4>{{ producto.NOMBRE_PRODUCTO }}</h4>
+        </ion-text>
+        <ion-text>
+          <h6>Costo: $ {{ producto.COSTO_PRODUCTO }}</h6>
+        </ion-text>
+        <ion-range name="range" min="0" max="10" color="tertiary" pin="true"
+          (ionChange)="cambioRango( $event, producto )" [disabled]="isReadOnly">
+          <ion-label slot="start">0</ion-label>
+          <ion-label slot="end">10</ion-label>
+        </ion-range>
+      </ion-label>
+    </ion-item>
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px;"
+      (click)="calificar(); deshabilitar();">
+      Calificar
+    </ion-button>
+  </ion-list>
+  <ion-list>
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+      (click)="saltoPaginaComprador()">
+      Volver
+    </ion-button>
+  </ion-list>
+</ion-content>
+

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ofrece tus productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <h4><b>{{ nombre }} {{ apellidos }}</b></h4>
+  </ion-row>
+  <ion-row>
+    <p>{{ correoElectronico }}</p>
+  </ion-row>
+  <ion-row>
+    <p>{{ nombreComuna }}</p>
+  </ion-row>
+  <ion-row>
+    <p>{{ direccion }}</p>
+  </ion-row>
+  <ion-list>
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+      (click)="agregarProducto()">
+      Agregar Producto
+    </ion-button>
+    <h3>Productos Ofrecidos</h3>
+    <ion-item *ngFor="let producto of productos" style="margin-top: 20px;">
+      <ion-label text-wrap>
+        <ion-text>
+          <h6>{{ producto.NOMBRE_PRODUCTO }}</h6>
+        </ion-text>
+        <ion-text>
+          <p>Costo por kilo o unidad: <b>${{ producto.COSTO_PRODUCTO }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Valoraciones del producto: <b>{{ producto.VALORACION_PRODUCTO }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Cantidad de producto ofrecido: <b>{{ producto.CANTIDAD_PRODUCTO }}</b></p>
+        </ion-text>
+        <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 10px;"
+          (click)="editar(producto)">
+          Editar
+        </ion-button>
+      </ion-label>
+    </ion-item>
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+      (click)="cerrarSesion()">
+      Cerrar sesión
+    </ion-button>
+  </ion-list>
+</ion-content>

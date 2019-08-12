@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Módulo de Pago</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Datos de usuario/a</h3>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <ion-text>
+          <h4>Nombre: {{ usuario.nombre }} {{ usuario.apellidos }}</h4>
+        </ion-text>
+        <ion-text>
+          <h4>Rut: {{ usuario.rut }}</h4>
+        </ion-text>
+        <ion-text>
+          <h4>Correo: {{ usuario.correo }}</h4>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <h3>Lista de Productos</h3>
+  <ion-list>
+    <ion-item *ngFor="let productoComprado of listaProductos" style="margin-top: 10px;">
+      <ion-label>
+        <ion-text>
+          <h4>{{ productoComprado.nombre }}</h4>
+        </ion-text>
+        <ion-text>
+          <h6>Monto: $ {{ productoComprado.monto }}</h6>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <h3>Monto a pagar</h3>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <ion-text>
+          <h4><b>Pago: $ {{ montoCompra }}</b></h4>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+      (click)="hacerPago()">
+      Pagar
+    </ion-button>
+  </ion-list>
+  <ion-list>
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+      (click)="saltoPaginaComprador()">
+      Volver
+    </ion-button>
+  </ion-list>
+</ion-content>
+

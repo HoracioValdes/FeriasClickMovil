@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Compra tus productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <h4><b>{{ nombre }} {{ apellidos }}</b></h4>
+  </ion-row>
+  <ion-row>
+    <p>{{ correoElectronico }}</p>
+  </ion-row>
+  <ion-row>
+    <p>{{ nombreComuna }}</p>
+  </ion-row>
+  <ion-row>
+    <p>{{ direccion }}</p>
+  </ion-row>
+  <ion-list>
+    <h3>Productos a comprar</h3>
+    <p>Monto Total $ {{ sumaCompra }}</p>
+    <ion-item *ngFor="let productoComprado of productosComprados" style="margin-top: 20px;">
+      <p>{{ productoComprado.nombre }} monto: ${{ productoComprado.monto }}</p>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let producto of productos" style="margin-top: 20px;">
+      <ion-label text-wrap>
+        <ion-text>
+          <h6>{{ producto.NOMBRE_PRODUCTO }}</h6>
+        </ion-text>
+        <ion-text>
+          <p>Costo por kilo o unidad: <b>${{ producto.COSTO_PRODUCTO }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Valoraciones del producto: <b>{{ producto.VALORACION_PRODUCTO }}</b></p>
+        </ion-text>
+        <div item-content>
+          <ion-range name="range" min="0" max="{{ producto.CANTIDAD_PRODUCTO }}" color="tertiary" pin="true"
+            (ionChange)="cambioRango( $event )">
+            <ion-label slot="start">0</ion-label>
+            <ion-label slot="end">{{ producto.CANTIDAD_PRODUCTO}}</ion-label>
+          </ion-range>
+        </div>
+        <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px;" (click)="agregar(producto)"
+          (ionFocus)="hola()" (ionBlur)="resetearValor()">
+          Agregar
+        </ion-button>
+      </ion-label>
+    </ion-item>
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+      (click)="confirmarCompra()">
+      Realizar pago
+    </ion-button>
+  </ion-list>
+  <ion-list>
+    <h3>Despachos por calificar</h3>
+    <ion-item *ngFor="let despacho of despachos" style="margin-top: 20px;">
+      <ion-label text-wrap>
+        <ion-text>
+          <p>Fecha de despacho: <b>{{ despacho.FECHA_HORA_DESPACHO }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Nombre de repartidor: <b>{{ despacho.NOMBRE_REPARTIDOR }} {{ despacho.APELLIDOS_REPARTIDOR }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Monto de la compra: <b>$ {{ despacho.MONTO_COMPRA }}</b></p>
+        </ion-text>
+        <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 15px;"
+          (click)="calificar(despacho)">
+          Calificar
+        </ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+      (click)="cerrarSesion()">
+      Cerrar sesión
+    </ion-button>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reparte los productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <h4><b>{{ nombre }} {{ apellidos }}</b></h4>
+  </ion-row>
+  <ion-row>
+    <p>{{ correoElectronico }}</p>
+  </ion-row>
+  <ion-row>
+    <p>{{ nombreComuna }}</p>
+  </ion-row>
+  <ion-row>
+    <p>{{ direccion }}</p>
+  </ion-row>
+  <ion-list>
+    <h3>Despacho en Entrega</h3>
+    <p>Nombre de cliente: <b>{{ nombreCliente }}</b></p>
+    <p>Comuna: <b>{{ comunaCliente }}</b></p>
+    <p>Direccion: <b>{{ direccionCliente }}</b></p>
+    <p>Fecha y Hora de Compra: <b>{{ fechaCompraCliente }}</b></p>
+    <p>Monto de Compra: <b>{{ montoCompraCliente }}</b></p>
+    <p>Ganancia: <b>$ {{ ganancia}}</b></p>
+  </ion-list>
+  <ion-list>
+    <h3>Lista de Productos del Despacho</h3>
+    <ion-item *ngFor="let productoEntrega of listaProductosEntrega" style="margin-top: 20px;">
+      <ion-label text-wrap>
+        <ion-text>
+          <p>Nombre producto: <b>{{ productoEntrega.NOMBRE_PRODUCTO }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Nombre de comerciante: <b>{{ productoEntrega.NOMBRE }} {{ productoEntrega.APELLIDOS }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Cantidad: <b>{{ productoEntrega.CANTIDAD_PRODUCTO }}</b></p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+      (click)="confirmarEntrega()">
+      Entrega
+    </ion-button>
+  </ion-list>
+  <ion-list>
+    <h3>Lista de Comentarios Recibidos</h3>
+    <ion-item *ngFor="let comentario of listaComentarios" style="margin-top: 20px;">
+      <ion-label text-wrap>
+        <ion-text>
+          <p style="font-size: 15px;"><b>Comentario: {{ comentario.TEXTO_COMENTARIO }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Fecha y hora del comentario: <b>{{ comentario.FECHA_COMENTARIO }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Comprador/a: <b>{{ comentario.NOMBRE_COMPRADOR }} {{ comentario.APELLIDOS_COMPRADOR }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Dirección: <b>{{ comentario.DIRECCION_COMPRADOR }} </b></p>
+        </ion-text>
+        <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px;"
+          (click)="comentarioVisto(comentario)">
+          Revisado
+        </ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <h3>Lista de Despachos Pendientes</h3>
+    <ion-item *ngFor="let compra of comprasPendientes" style="margin-top: 20px;">
+      <ion-label text-wrap>
+        <ion-text>
+          <p>Nombre de cliente: <b>{{ compra.NOMBRE }} {{ compra.APELLIDOS }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Comuna: <b>{{ compra.NOMBRE_COMUNA }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Direccion: <b>{{ compra.DIRECCION }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Fecha y hora de compra: <b>{{ compra.FECHA_HORA_COMPRA }}</b></p>
+        </ion-text>
+        <ion-text>
+          <p>Monto de compra: <b>$ {{ compra.MONTO_COMPRA }}</b></p>
+        </ion-text>
+        <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px;" (click)="enEntrega(compra)">
+          Despachar
+        </ion-button>
+      </ion-label>
+    </ion-item>
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+      (click)="cerrarSesion()">
+      Cerrar sesión
+    </ion-button>
+  </ion-list>
+</ion-content>

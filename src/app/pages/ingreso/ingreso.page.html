@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Regresar" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ingreso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h1>Ingreso a la aplicación</h1>
+  <p>Ingrese sus datos:</p>
+  <form #formulario="ngForm" (ngSubmit)="ingresar(formulario)">
+
+    <ion-row>
+      <ion-input placeholder="Ingrese su nombre de usuario" [(ngModel)]="model.nombreUsuario" name="nombre_usuario"
+        maxlength="100" required></ion-input>
+    </ion-row>
+    <ion-row>
+      <ion-input placeholder="Ingrese su clave" [(ngModel)]="model.clave" name="clave" type="password" maxlength="50"
+        required></ion-input>
+    </ion-row>
+    <ion-row class="top-20">
+      <ion-col>
+        <ion-button [disabled]="formulario.invalid" type="submit" fill="solid" expand="full" color="tertiary">
+          Ingresar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>
