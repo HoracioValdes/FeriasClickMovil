@@ -12,8 +12,10 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit {
 
   // Variables de logueo automático
-  nombreUsuarioLogueo: string;
-  claveLogueo: string;
+  nombreUsuarioLogueo = '';
+  claveLogueo = '';
+  confirmacionUsuario = false;
+  confirmacionClave = false;
 
   usuario: any = [];
   data: Observable<any>;
@@ -34,15 +36,6 @@ export class HomePage implements OnInit {
     private storage: Storage
   ) {}
 
-  imprimirDatosUsuario() {
-    this.storage.get('nombreUsuario').then((val) => {
-      console.log('La preferida es ', val);
-    });
-    this.storage.get('clave').then((val) => {
-      console.log('La clave es ', val);
-    });
-  }
-
   obtenerDatosUsuario() {
     this.storage.get('nombreUsuario').then((val) => {
       this.nombreUsuarioLogueo = val;
@@ -52,14 +45,18 @@ export class HomePage implements OnInit {
       this.claveLogueo = val;
       console.log(this.claveLogueo);
     });
+    if (this.nombreUsuarioLogueo.length > 0 && this.claveLogueo.length > 0) {
+      this.logeoAutomatico(this.nombreUsuarioLogueo, this.claveLogueo);
+      // console.log('listo para método');
+    }
   }
 
-  logeoAutomatico() {
+  logeoAutomatico(nombreUsuario: string, clave: string) {
     const urlDos = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=2';
     const postDataDos = new FormData();
     // Agrego datos a la consulta
-    postDataDos.append('nombreUsuario', this.nombreUsuarioLogueo);
-    postDataDos.append('clave', this.claveLogueo);
+    postDataDos.append('nombreUsuario', nombreUsuario);
+    postDataDos.append('clave', clave);
     // Consulta
     this.data = this.http.post(urlDos, postDataDos);
     // Recogida de datos
@@ -136,12 +133,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.imprimirDatosUsuario();
     this.obtenerDatosUsuario();
-
-    if (this.nombreUsuarioLogueo !== null && this.claveLogueo !== null) {
-      this.logeoAutomatico();
-    }
   }
 
 }
