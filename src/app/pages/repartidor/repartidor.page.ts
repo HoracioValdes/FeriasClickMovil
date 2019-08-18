@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-repartidor',
@@ -58,7 +59,8 @@ export class RepartidorPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     public http: HttpClient,
     public toastController: ToastController,
-    public router: Router
+    public router: Router,
+    private storage: Storage
   ) { }
 
   ngOnInit() {
@@ -376,7 +378,14 @@ export class RepartidorPage implements OnInit {
 
   // Cerrar sesión
   cerrarSesion() {
+    this.seteoDatosUsuario('', '');
     this.router.navigate(['home']);
+  }
+
+  // Seteo de datos de storage
+  seteoDatosUsuario(nombreUsuario: string, clave: string) {
+    this.storage.set('nombreUsuario', nombreUsuario);
+    this.storage.set('clave', clave);
   }
 }
 

@@ -46,15 +46,6 @@ export class IngresoPage implements OnInit {
     this.storage.set('clave', clave);
   }
 
-  imprimirDatosUsuario() {
-    this.storage.get('nombreUsuario').then((val) => {
-      console.log('La preferida es ', val);
-    });
-    this.storage.get('clave').then((val) => {
-      console.log('La clave es ', val);
-    });
-  }
-
   // Toast de datos inválidos
   async datosInvalidos() {
     const toast = await this.toastController.create({
@@ -160,7 +151,6 @@ export class IngresoPage implements OnInit {
   }
 
   ngOnInit() {
-    this.imprimirDatosUsuario();
   }
 
 }

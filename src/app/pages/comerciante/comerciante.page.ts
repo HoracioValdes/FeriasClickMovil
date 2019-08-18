@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ProductoOfrecido } from '../../producto-ofrecido';
 import { Usuario } from '../../usuario';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-comerciante',
@@ -40,7 +41,8 @@ export class ComerciantePage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     public router: Router,
-    public http: HttpClient
+    public http: HttpClient,
+    private storage: Storage
   ) { }
 
   ngOnInit() {
@@ -134,7 +136,14 @@ export class ComerciantePage implements OnInit {
 
   // Cerrar sesión
   cerrarSesion() {
+    this.seteoDatosUsuario('', '');
     this.router.navigate(['home']);
+  }
+
+  // Seteo de datos de storage
+  seteoDatosUsuario(nombreUsuario: string, clave: string) {
+    this.storage.set('nombreUsuario', nombreUsuario);
+    this.storage.set('clave', clave);
   }
 
   ionViewDidEnter() {

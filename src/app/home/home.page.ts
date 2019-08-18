@@ -40,15 +40,17 @@ export class HomePage implements OnInit {
     this.storage.get('nombreUsuario').then((val) => {
       this.nombreUsuarioLogueo = val;
       console.log(this.nombreUsuarioLogueo);
+
+      this.storage.get('clave').then((valDos) => {
+        this.claveLogueo = valDos;
+        console.log(this.claveLogueo);
+
+        if (this.nombreUsuarioLogueo.length > 0 && this.claveLogueo.length > 0) {
+          console.log('entrando a método de logueo');
+          this.logeoAutomatico(this.nombreUsuarioLogueo, this.claveLogueo);
+        }
+      });
     });
-    this.storage.get('clave').then((val) => {
-      this.claveLogueo = val;
-      console.log(this.claveLogueo);
-    });
-    if (this.nombreUsuarioLogueo.length > 0 && this.claveLogueo.length > 0) {
-      this.logeoAutomatico(this.nombreUsuarioLogueo, this.claveLogueo);
-      // console.log('listo para método');
-    }
   }
 
   logeoAutomatico(nombreUsuario: string, clave: string) {
