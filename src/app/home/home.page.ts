@@ -17,6 +17,9 @@ export class HomePage implements OnInit {
   confirmacionUsuario = false;
   confirmacionClave = false;
 
+  // Variable de visibilidad de los botones
+  manejo = true;
+
   usuario: any = [];
   data: Observable<any>;
   idUsuario: string;
@@ -48,6 +51,8 @@ export class HomePage implements OnInit {
         if (this.nombreUsuarioLogueo.length > 0 && this.claveLogueo.length > 0) {
           console.log('entrando a método de logueo');
           this.logeoAutomatico(this.nombreUsuarioLogueo, this.claveLogueo);
+        } else {
+          this.manejo = false;
         }
       });
     });
@@ -135,6 +140,10 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    console.log('carga super rápida!!!');
     this.obtenerDatosUsuario();
   }
 
