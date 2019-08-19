@@ -3,6 +3,7 @@ import { NavController, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-ingreso',
@@ -35,8 +36,15 @@ export class IngresoPage implements OnInit {
     public navCtrl: NavController,
     public http: HttpClient,
     public toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private storage: Storage
   ) { }
+
+  // Seteo de datos de storage
+  seteoDatosUsuario(nombreUsuario: string, clave: string) {
+    this.storage.set('nombreUsuario', nombreUsuario);
+    this.storage.set('clave', clave);
+  }
 
   // Toast de datos inválidos
   async datosInvalidos() {
@@ -127,6 +135,7 @@ export class IngresoPage implements OnInit {
       // Revisión de resultado
       if (data.length >= 1) {
         this.loginExitoso();
+        this.seteoDatosUsuario(this.model.nombreUsuario, this.model.clave);
         // Revisión de tipo de usuario
         if (this.usuario[0].TIPO === 'COMPRADOR') {
           this.saltoPaginaComprador();

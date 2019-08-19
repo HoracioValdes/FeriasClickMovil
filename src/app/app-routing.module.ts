@@ -19,6 +19,9 @@ const routes: Routes = [
   { path: 'registro', loadChildren: './pages/registro/registro.module#RegistroPageModule' },
   { path: 'repartidor/:nombre/:apellidos/:clave/:idComuna/:correoElectronico/:direccion/:nombreUsuario/:rut/:tipo/:idUsuario',
   loadChildren: './pages/repartidor/repartidor.module#RepartidorPageModule' },
+  { path: 'carga-imagen-perfil/:usuariObj',
+  loadChildren: './pages/carga-imagen-perfil/carga-imagen-perfil.module#CargaImagenPerfilPageModule' },
+
 ];
 
 @NgModule({

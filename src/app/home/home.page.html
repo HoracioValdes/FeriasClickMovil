@@ -12,23 +12,16 @@
   </div>
   <ion-row class="top-20">
     <ion-col>
-      <ion-button fill="solid" expand="full" routerLink="/registro" color="tertiary">
+      <ion-button fill="solid" expand="full" routerLink="/registro" color="tertiary" [hidden]="manejo">
         Registro
       </ion-button>
     </ion-col>
   </ion-row>
   <ion-row class="top-20">
     <ion-col>
-      <ion-button fill="solid" expand="full" routerLink="/ingreso" color="tertiary">
+      <ion-button fill="solid" expand="full" routerLink="/ingreso" color="tertiary" [hidden]="manejo">
         Ingreso
       </ion-button>
     </ion-col>
   </ion-row>
-  <!--<ion-row class="top-20">
-    <ion-col>
-      <ion-button fill="solid" expand="full" color="tertiary" onclick="salir()">
-        Salir
-      </ion-button>
-    </ion-col>  
-  </ion-row>-->
 </ion-content>

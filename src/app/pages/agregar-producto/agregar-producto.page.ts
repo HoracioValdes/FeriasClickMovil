@@ -51,9 +51,9 @@ export class AgregarProductoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Recepción de datos}
+    // Recepción de datos
     const dataUsuarioRecv = this.activateRoute.snapshot.paramMap.get('usuariObj');
-    // Parseo de objetos}
+    // Parseo de objetos
     this.usuario = JSON.parse(dataUsuarioRecv);
     console.log(this.usuario);
     // Obtención de tipos de productos

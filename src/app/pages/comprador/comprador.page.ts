@@ -6,6 +6,7 @@ import { ProductoCompra } from '../../producto-compra';
 import { Router } from '@angular/router';
 import { Usuario } from '../../usuario';
 import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-comprador',
@@ -50,7 +51,8 @@ export class CompradorPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     public http: HttpClient,
     public router: Router,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private storage: Storage
   ) { }
 
   ngOnInit() {
@@ -159,7 +161,14 @@ export class CompradorPage implements OnInit {
 
   // Cerrar sesión
   cerrarSesion() {
+    this.seteoDatosUsuario('', '');
     this.router.navigate(['home']);
+  }
+
+  // Seteo de datos de storage
+  seteoDatosUsuario(nombreUsuario: string, clave: string) {
+    this.storage.set('nombreUsuario', nombreUsuario);
+    this.storage.set('clave', clave);
   }
 
   // Toast de cantidad nula
@@ -239,5 +248,13 @@ export class CompradorPage implements OnInit {
     console.log('Me voy');
     // Limpieza de intervalo
     clearInterval(this.myInterval);
+  }
+
+  subirImagen() {
+    this.usuario = new Usuario(this.idUsuario, this.rut, this.nombre, this.apellidos, this.nombreUsuario,
+      this.clave, this.correoElectronico, this.tipo, this.idComuna, this.direccion);
+    console.log(this.usuario);
+    const usuariObj = JSON.stringify(this.usuario);
+    this.router.navigate(['carga-imagen-perfil', usuariObj]);
   }
 }
