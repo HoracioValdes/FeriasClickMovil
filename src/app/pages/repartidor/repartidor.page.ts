@@ -387,5 +387,8 @@ export class RepartidorPage implements OnInit {
     this.storage.set('nombreUsuario', nombreUsuario);
     this.storage.set('clave', clave);
   }
+
+  subirImagen() {
+  }
 }
 

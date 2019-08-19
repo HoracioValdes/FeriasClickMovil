@@ -165,5 +165,8 @@ export class ComerciantePage implements OnInit {
     // Limpieza de intervalo
     clearInterval(this.myInterval);
   }
+
+  subirImagen() {
+  }
 }
 

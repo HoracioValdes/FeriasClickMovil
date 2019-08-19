@@ -249,4 +249,12 @@ export class CompradorPage implements OnInit {
     // Limpieza de intervalo
     clearInterval(this.myInterval);
   }
+
+  subirImagen() {
+    this.usuario = new Usuario(this.idUsuario, this.rut, this.nombre, this.apellidos, this.nombreUsuario,
+      this.clave, this.correoElectronico, this.tipo, this.idComuna, this.direccion);
+    console.log(this.usuario);
+    const usuariObj = JSON.stringify(this.usuario);
+    this.router.navigate(['carga-imagen-perfil', usuariObj]);
+  }
 }
