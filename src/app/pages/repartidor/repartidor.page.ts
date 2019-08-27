@@ -91,7 +91,7 @@ export class RepartidorPage implements OnInit {
 
   obtenerComentarios() {
     // Consulta de comentarios
-    const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=29';
+    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=29';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idUsuario', this.idUsuario);
@@ -106,7 +106,7 @@ export class RepartidorPage implements OnInit {
 
   comentarioVisto(comentario) {
     // Actualización de compra
-    const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=30';
+    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=30';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idCompra', comentario.ID_COMPRA);
@@ -125,7 +125,7 @@ export class RepartidorPage implements OnInit {
 
   obtenerComuna() {
     // Consulta de productos
-    const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=16';
+    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=16';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idComuna', this.idComuna);
@@ -140,7 +140,7 @@ export class RepartidorPage implements OnInit {
 
   obtenerDespachosPendientes() {
     // Consulta de productos
-    const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=17';
+    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=17';
     const postData = new FormData();
     // Consulta
     this.data = this.http.post(url, postData);
@@ -156,7 +156,7 @@ export class RepartidorPage implements OnInit {
       console.log('En entrega');
       // Operación en la base de datos
       // Carga de la base de datos
-      const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=18';
+      const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=18';
       const postData = new FormData();
       postData.append('idCompra', compra.ID_COMPRA);
       this.data = this.http.post(url, postData);
@@ -186,7 +186,7 @@ export class RepartidorPage implements OnInit {
   }
 
   obtenerCompraEnEntrega() {
-    const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=20';
+    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=20';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idUsuario', this.idUsuario);
@@ -214,7 +214,7 @@ export class RepartidorPage implements OnInit {
   }
 
   obtenerProductosDeCompraEnEntrega() {
-    const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=21';
+    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=21';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idCompra', this.productoEnEntrega[0].ID_COMPRA);
@@ -236,7 +236,7 @@ export class RepartidorPage implements OnInit {
   confirmarEntrega() {
     if (this.entrega === true) {
       // Carga de la base de datos
-      const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=22';
+      const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=22';
       const postData = new FormData();
       postData.append('idCompra', this.productoEnEntrega[0].ID_COMPRA);
       this.data = this.http.post(url, postData);
@@ -245,7 +245,7 @@ export class RepartidorPage implements OnInit {
           console.log('Compra actualizada');
           this.obtenerFecha();
           // Carga de la base de datos
-          const urlDos = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=23';
+          const urlDos = 'https://api.feriasclick.com/ferias/registro.php?opcion=23';
           const postDataDos = new FormData();
           console.log(this.fechaHoraFormato);
           postDataDos.append('fecha', this.fechaHoraFormato);
@@ -320,7 +320,7 @@ export class RepartidorPage implements OnInit {
   insertarDespacho(compra) {
     this.obtenerFecha();
     // Carga de la base de datos
-    const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=19';
+    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=19';
     const postData = new FormData();
     postData.append('fechaHoraDespacho', this.fechaHoraFormato);
     postData.append('direccionDespacho', compra.DIRECCION);

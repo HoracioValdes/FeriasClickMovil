@@ -48,9 +48,13 @@ export class HomePage implements OnInit {
         this.claveLogueo = valDos;
         console.log(this.claveLogueo);
 
-        if (this.nombreUsuarioLogueo.length > 0 && this.claveLogueo.length > 0) {
-          console.log('entrando a método de logueo');
-          this.logeoAutomatico(this.nombreUsuarioLogueo, this.claveLogueo);
+        if (this.nombreUsuarioLogueo !== null && this.claveLogueo !== null) {
+          if (this.nombreUsuarioLogueo.length > 0 && this.claveLogueo.length > 0) {
+            console.log('entrando a método de logueo');
+            this.logeoAutomatico(this.nombreUsuarioLogueo, this.claveLogueo);
+          } else {
+            this.manejo = false;
+          }
         } else {
           this.manejo = false;
         }
@@ -59,7 +63,7 @@ export class HomePage implements OnInit {
   }
 
   logeoAutomatico(nombreUsuario: string, clave: string) {
-    const urlDos = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=2';
+    const urlDos = 'https://api.feriasclick.com/ferias/registro.php?opcion=2';
     const postDataDos = new FormData();
     // Agrego datos a la consulta
     postDataDos.append('nombreUsuario', nombreUsuario);
@@ -81,6 +85,8 @@ export class HomePage implements OnInit {
         } else if (this.usuario[0].TIPO === 'REPARTIDOR') {
           this.saltoPaginaRepartidor();
         }
+      } else {
+        this.manejo = false;
       }
     });
   }

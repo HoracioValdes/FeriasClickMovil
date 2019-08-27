@@ -40,7 +40,7 @@ export class RegistroPage implements OnInit {
   }
 
   ngOnInit() {
-    const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=15';
+    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=15';
     const postData = new FormData();
     // Consulta
     this.data = this.http.post(url, postData);
@@ -83,7 +83,7 @@ export class RegistroPage implements OnInit {
   registrar(formulario) {
     console.log(formulario);
     // Carga de la base de datos
-    const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=3';
+    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=3';
     const postData = new FormData();
     postData.append('rut', this.model.rut.toUpperCase());
     postData.append('nombre', this.model.nombre.toUpperCase());

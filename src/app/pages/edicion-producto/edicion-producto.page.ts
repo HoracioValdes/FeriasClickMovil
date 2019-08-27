@@ -52,7 +52,7 @@ export class EdicionProductoPage implements OnInit {
     console.log('Cantidad: ' + this.model.cantidadProducto);
     // Operación en la base de datos
     // Carga de la base de datos
-    const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=10';
+    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=10';
     const postData = new FormData();
     postData.append('idProducto', this.productoEditable.idProducto);
     postData.append('nombreProducto', this.model.nombreProducto.toUpperCase());

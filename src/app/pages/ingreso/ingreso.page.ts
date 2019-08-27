@@ -119,7 +119,7 @@ export class IngresoPage implements OnInit {
   }
 
   ingresar(formulario) {
-    const url = 'http://www.feriasclick.escuela-fundacion-sol.cl/ferias/registro.php?opcion=2';
+    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=2';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('nombreUsuario', this.model.nombreUsuario);
