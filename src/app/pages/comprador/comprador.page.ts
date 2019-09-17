@@ -195,7 +195,7 @@ export class CompradorPage implements OnInit {
 
   obtenerProductos() {
     // Consulta de productos
-    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=1';
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=1';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idComuna', this.idComuna);
@@ -210,7 +210,7 @@ export class CompradorPage implements OnInit {
 
   obtenerDespachos() {
     // Consulta de despachos
-    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=24';
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=24';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idUsuario', this.idUsuario);
@@ -225,7 +225,7 @@ export class CompradorPage implements OnInit {
 
   obtenerComuna() {
     // Consulta de productos
-    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=16';
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=16';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idComuna', this.idComuna);

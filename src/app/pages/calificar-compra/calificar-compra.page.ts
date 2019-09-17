@@ -121,7 +121,7 @@ export class CalificarCompraPage implements OnInit {
       const horaFormato = (fechaActual.getHours() + ':' + fechaActual.getMinutes() + ':' + fechaActual.getSeconds());
       const fechaHoraFormato = fechaFormato + ' ' + horaFormato;
       console.log(fechaHoraFormato);
-      const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=26';
+      const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=26';
       const postData = new FormData();
       postData.append('texto', this.texto);
       postData.append('fechaHoraComentario', fechaHoraFormato);
@@ -133,7 +133,7 @@ export class CalificarCompraPage implements OnInit {
 
           // Inserción de calificaciones por producto
           this.productosEvaluados.forEach(prodEva => {
-            const urlDos = 'https://api.feriasclick.com/ferias/registro.php?opcion=27';
+            const urlDos = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=27';
             const postDataDos = new FormData();
             postDataDos.append('valoracionProducto', prodEva.valoracionTotal.toString());
             postDataDos.append('idProducto', prodEva.idProducto.toString());
@@ -147,7 +147,7 @@ export class CalificarCompraPage implements OnInit {
             });
           });
           // Cambio de estado de compra
-          const urlTres = 'https://api.feriasclick.com/ferias/registro.php?opcion=28';
+          const urlTres = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=28';
           const postDataTres = new FormData();
           postDataTres.append('idCompra', this.despacho.ID_COMPRA);
           this.dataTres = this.http.post(urlTres, postDataTres);
@@ -197,7 +197,7 @@ export class CalificarCompraPage implements OnInit {
 
   obtenerProductos() {
     // Consulta de productos
-    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=25';
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=25';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('despachaId', this.despacho.ID_DESPACHO);

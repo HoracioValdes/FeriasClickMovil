@@ -57,7 +57,7 @@ export class AgregarProductoPage implements OnInit {
     this.usuario = JSON.parse(dataUsuarioRecv);
     console.log(this.usuario);
     // Obtención de tipos de productos
-    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=11';
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=11';
     const postData = new FormData();
     // Consulta
     this.data = this.http.post(url, postData);
@@ -76,7 +76,7 @@ export class AgregarProductoPage implements OnInit {
     console.log('Tipo: ' + this.model.idTipo);
     // Operación en la base de datos
     // Carga de la base de datos
-    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=12';
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=12';
     const postData = new FormData();
     postData.append('nombreProducto', this.model.nombreProducto.toUpperCase());
     postData.append('cantidadProducto', this.model.cantidadProducto);

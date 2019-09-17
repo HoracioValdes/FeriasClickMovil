@@ -77,7 +77,7 @@ export class ComerciantePage implements OnInit {
 
   obtenerComuna() {
     // Consulta de productos
-    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=16';
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=16';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idComuna', this.idComuna);
@@ -92,7 +92,7 @@ export class ComerciantePage implements OnInit {
 
   obtenerProductos() {
     // Consulta de productos
-    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=9';
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=9';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idUsuario', this.idUsuario);

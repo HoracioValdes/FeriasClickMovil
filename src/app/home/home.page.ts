@@ -63,7 +63,7 @@ export class HomePage implements OnInit {
   }
 
   logeoAutomatico(nombreUsuario: string, clave: string) {
-    const urlDos = 'https://api.feriasclick.com/ferias/registro.php?opcion=2';
+    const urlDos = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=2';
     const postDataDos = new FormData();
     // Agrego datos a la consulta
     postDataDos.append('nombreUsuario', nombreUsuario);

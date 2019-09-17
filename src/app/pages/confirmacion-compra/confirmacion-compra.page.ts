@@ -74,7 +74,7 @@ export class ConfirmacionCompraPage implements OnInit {
     const horaFormato = (fechaActual.getHours() + ':' + fechaActual.getMinutes() + ':' + fechaActual.getSeconds());
     const fechaHoraFormato = fechaFormato + ' ' + horaFormato;
     console.log(fechaHoraFormato);
-    const url = 'https://api.feriasclick.com/ferias/registro.php?opcion=4';
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=4';
     const postData = new FormData();
     postData.append('monto', this.montoCompra.toString());
     postData.append('idUsuario', this.usuario.idUsuario);
@@ -83,7 +83,7 @@ export class ConfirmacionCompraPage implements OnInit {
     this.data.subscribe(data => {
       if (data === true) {
         console.log('Compra insertada');
-        const urlDos = 'https://api.feriasclick.com/ferias/registro.php?opcion=5';
+        const urlDos = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=5';
         const postDataDos = new FormData();
         // Agrego datos a la consulta
         postDataDos.append('idUsuario', this.usuario.idUsuario);
@@ -99,7 +99,7 @@ export class ConfirmacionCompraPage implements OnInit {
             // Revisión de tipo de usuario
             console.log('Datos Encontrados');
             for (const producto of this.listaProductos) {
-              const urlTres = 'https://api.feriasclick.com/ferias/registro.php?opcion=6';
+              const urlTres = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=6';
               this.postDataTres = new FormData();
               this.postDataTres.append('idCompra', this.idCompra);
               this.postDataTres.append('idProducto', producto.idProducto);
@@ -109,7 +109,7 @@ export class ConfirmacionCompraPage implements OnInit {
                 if (dataTres === true) {
                   console.log(dataTres);
                   console.log('CANTIDAD PRODUCTO: ' + producto.cantidad);
-                  const urlCuatro = 'https://api.feriasclick.com/ferias/registro.php?opcion=7';
+                  const urlCuatro = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=7';
                   this.postDataCuatro = new FormData();
                   // Agrego datos a la consulta
                   this.postDataCuatro.append('idProducto', producto.idProducto);
@@ -123,7 +123,7 @@ export class ConfirmacionCompraPage implements OnInit {
                     if (dataCuatro.length >= 1) {
                       this.cantidadActualizar = this.cantidadEliminar - producto.cantidad;
                       console.log('NUEVA CANTIDAD: ' + this.cantidadActualizar);
-                      const urlCinco = 'https://api.feriasclick.com/ferias/registro.php?opcion=8';
+                      const urlCinco = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=8';
                       this.postDataCinco = new FormData();
                       this.postDataCinco.append('idProducto', producto.idProducto);
                       this.postDataCinco.append('cantidad', this.cantidadActualizar);
