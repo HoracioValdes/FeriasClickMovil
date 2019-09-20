@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Usuario } from '../../usuario';
 import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Component({
   selector: 'app-comprador',
@@ -47,12 +48,16 @@ export class CompradorPage implements OnInit {
 
   tamaño: any;
 
+  // Parámetro de obtención de foto de perfil
+  perfil = '';
+
   constructor(
     private activatedRoute: ActivatedRoute,
     public http: HttpClient,
     public router: Router,
     public toastController: ToastController,
-    private storage: Storage
+    private storage: Storage,
+    private webview: WebView
   ) { }
 
   ngOnInit() {
@@ -76,6 +81,8 @@ export class CompradorPage implements OnInit {
 
     // Consulta de despachos
     this.obtenerDespachos();
+
+    this.perfil = 'http://feriasclick.desarrollo-tecnologico.com/perfiles/' + this.idUsuario + '.jpg';
   }
 
   agregar(producto) {
@@ -191,6 +198,7 @@ export class CompradorPage implements OnInit {
     this.sumaCompra = 0;
     this.productosComprados = [];
     this.contadorCompra = 0;
+    this.perfil = 'http://feriasclick.desarrollo-tecnologico.com/perfiles/' + this.idUsuario + '.jpg';
   }
 
   obtenerProductos() {
