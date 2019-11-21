@@ -5,7 +5,14 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
   <h3>Datos de usuario/a</h3>
+
   <ion-list>
     <ion-item>
       <ion-label>
@@ -21,7 +28,19 @@
       </ion-label>
     </ion-item>
   </ion-list>
+
   <h3>Edición de {{ productoEditable.nombreProducto }}</h3>
+  
+  <ion-list>
+    <ion-avatar>
+      <ion-img [src]="producto"></ion-img>
+    </ion-avatar>
+    <ion-button fill="clear" color="tertiary" slot="start" style="margin-bottom: 10px; margin-top: 15px;"
+      (click)="subirImagen()">
+      Subir imagen de producto
+    </ion-button>
+  </ion-list>
+
   <form #formulario="ngForm" (ngSubmit)="modificar(formulario)">
     <ion-input placeholder="Ingrese nuevo nombre" [(ngModel)]="model.nombreProducto" type="text" name="nombreProducto"
       maxlength="200" required>
@@ -46,9 +65,11 @@
       </ion-col>
     </ion-row>
   </form>
+
   <ion-list>
     <ion-button fill="solid" color="tertiary" (click)="volver()">
       Volver
     </ion-button>
   </ion-list>
+
 </ion-content>

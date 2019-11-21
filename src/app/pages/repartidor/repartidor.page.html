@@ -5,15 +5,22 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <ion-list>
     <ion-avatar>
-      <img [src]="">
+      <ion-img [src]="perfil"></ion-img>
     </ion-avatar>
-    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 15px;"
+    <ion-button fill="clear" color="tertiary" slot="start" style="margin-bottom: 10px; margin-top: 15px;"
       (click)="subirImagen()">
       Subir imagen de perfil
     </ion-button>
   </ion-list>
+  
   <ion-row>
     <h4><b>{{ nombre }} {{ apellidos }}</b></h4>
   </ion-row>

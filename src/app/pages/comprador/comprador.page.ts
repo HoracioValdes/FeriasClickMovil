@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,15 +7,14 @@ import { Router } from '@angular/router';
 import { Usuario } from '../../usuario';
 import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
+
 
 @Component({
   selector: 'app-comprador',
   templateUrl: './comprador.page.html',
-  styleUrls: ['./comprador.page.scss'],
+  styleUrls: ['./comprador.page.scss']
 })
 export class CompradorPage implements OnInit {
-
   // Parámetros de consulta de productos
   productos: any = [];
   despachos: any = [];
@@ -57,8 +56,8 @@ export class CompradorPage implements OnInit {
     public router: Router,
     public toastController: ToastController,
     private storage: Storage,
-    private webview: WebView
-  ) { }
+    private ref: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     // Recepción de datos de usuario
@@ -66,9 +65,13 @@ export class CompradorPage implements OnInit {
     this.apellidos = this.activatedRoute.snapshot.paramMap.get('apellidos');
     this.clave = this.activatedRoute.snapshot.paramMap.get('clave');
     this.idComuna = this.activatedRoute.snapshot.paramMap.get('idComuna');
-    this.correoElectronico = this.activatedRoute.snapshot.paramMap.get('correoElectronico');
+    this.correoElectronico = this.activatedRoute.snapshot.paramMap.get(
+      'correoElectronico'
+    );
     this.direccion = this.activatedRoute.snapshot.paramMap.get('direccion');
-    this.nombreUsuario = this.activatedRoute.snapshot.paramMap.get('nombreUsuario');
+    this.nombreUsuario = this.activatedRoute.snapshot.paramMap.get(
+      'nombreUsuario'
+    );
     this.rut = this.activatedRoute.snapshot.paramMap.get('rut');
     this.tipo = this.activatedRoute.snapshot.paramMap.get('tipo');
     this.idUsuario = this.activatedRoute.snapshot.paramMap.get('idUsuario');
@@ -82,6 +85,7 @@ export class CompradorPage implements OnInit {
     // Consulta de despachos
     this.obtenerDespachos();
 
+    // Carga de imagen de perfil
     this.perfil = 'http://feriasclick.desarrollo-tecnologico.com/perfiles/' + this.idUsuario + '.jpg';
   }
 
@@ -92,8 +96,12 @@ export class CompradorPage implements OnInit {
       console.log(producto.COSTO_PRODUCTO);
       console.log(this.cantidad);
       // Agregar objetos al Array
-      this.productoComprado = new ProductoCompra(producto.ID_PRODUCTO, producto.NOMBRE_PRODUCTO, producto.COSTO_PRODUCTO * this.cantidad,
-        this.cantidad);
+      this.productoComprado = new ProductoCompra(
+        producto.ID_PRODUCTO,
+        producto.NOMBRE_PRODUCTO,
+        producto.COSTO_PRODUCTO * this.cantidad,
+        this.cantidad
+      );
       this.sumaCompra = this.sumaCompra + this.productoComprado.monto;
       console.log(this.productosComprados.push(this.productoComprado));
       this.contadorCompra++;
@@ -105,8 +113,18 @@ export class CompradorPage implements OnInit {
 
   calificar(despacho) {
     if (despacho.MONTO_COMPRA > 0) {
-      this.usuario = new Usuario(this.idUsuario, this.rut, this.nombre, this.apellidos, this.nombreUsuario,
-        this.clave, this.correoElectronico, this.tipo, this.idComuna, this.direccion);
+      this.usuario = new Usuario(
+        this.idUsuario,
+        this.rut,
+        this.nombre,
+        this.apellidos,
+        this.nombreUsuario,
+        this.clave,
+        this.correoElectronico,
+        this.tipo,
+        this.idComuna,
+        this.direccion
+      );
       const usuariObj = JSON.stringify(this.usuario);
       const despachoObj = JSON.stringify(despacho);
       this.router.navigate(['calificar-compra', despachoObj, usuariObj]);
@@ -137,8 +155,18 @@ export class CompradorPage implements OnInit {
 
   confirmarCompra() {
     if (this.productosComprados.length > 0) {
-      this.usuario = new Usuario(this.idUsuario, this.rut, this.nombre, this.apellidos, this.nombreUsuario,
-        this.clave, this.correoElectronico, this.tipo, this.idComuna, this.direccion);
+      this.usuario = new Usuario(
+        this.idUsuario,
+        this.rut,
+        this.nombre,
+        this.apellidos,
+        this.nombreUsuario,
+        this.clave,
+        this.correoElectronico,
+        this.tipo,
+        this.idComuna,
+        this.direccion
+      );
       console.log(this.usuario.idUsuario);
       const usuariObj = JSON.stringify(this.usuario);
       const listaProductos = JSON.stringify(this.productosComprados);
@@ -198,12 +226,12 @@ export class CompradorPage implements OnInit {
     this.sumaCompra = 0;
     this.productosComprados = [];
     this.contadorCompra = 0;
-    this.perfil = 'http://feriasclick.desarrollo-tecnologico.com/perfiles/' + this.idUsuario + '.jpg';
   }
 
   obtenerProductos() {
     // Consulta de productos
-    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=1';
+    const url =
+      'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=1';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idComuna', this.idComuna);
@@ -218,7 +246,8 @@ export class CompradorPage implements OnInit {
 
   obtenerDespachos() {
     // Consulta de despachos
-    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=24';
+    const url =
+      'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=24';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idUsuario', this.idUsuario);
@@ -233,7 +262,8 @@ export class CompradorPage implements OnInit {
 
   obtenerComuna() {
     // Consulta de productos
-    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=16';
+    const url =
+      'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=16';
     const postData = new FormData();
     // Agrego datos a la consulta
     postData.append('idComuna', this.idComuna);
@@ -252,6 +282,17 @@ export class CompradorPage implements OnInit {
     window.location.reload();
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+      window.location.reload();
+      this.ref.detectChanges();
+    }, 2000);
+  }
+
   ionViewWillLeave() {
     console.log('Me voy');
     // Limpieza de intervalo
@@ -259,8 +300,18 @@ export class CompradorPage implements OnInit {
   }
 
   subirImagen() {
-    this.usuario = new Usuario(this.idUsuario, this.rut, this.nombre, this.apellidos, this.nombreUsuario,
-      this.clave, this.correoElectronico, this.tipo, this.idComuna, this.direccion);
+    this.usuario = new Usuario(
+      this.idUsuario,
+      this.rut,
+      this.nombre,
+      this.apellidos,
+      this.nombreUsuario,
+      this.clave,
+      this.correoElectronico,
+      this.tipo,
+      this.idComuna,
+      this.direccion
+    );
     console.log(this.usuario);
     const usuariObj = JSON.stringify(this.usuario);
     this.router.navigate(['carga-imagen-perfil', usuariObj]);

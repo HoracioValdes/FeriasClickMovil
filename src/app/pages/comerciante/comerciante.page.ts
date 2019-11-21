@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -38,11 +38,15 @@ export class ComerciantePage implements OnInit {
   // Parámetro de ejcución regular
   myInterval: any;
 
+  // Parámetro de obtención de foto de perfil
+  perfil = '';
+
   constructor(
     private activatedRoute: ActivatedRoute,
     public router: Router,
     public http: HttpClient,
-    private storage: Storage
+    private storage: Storage,
+    private ref: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -73,6 +77,20 @@ export class ComerciantePage implements OnInit {
 
     // Consulta de comuna
     this.obtenerComuna();
+
+    // Carga de imagen de perfil
+    this.perfil = 'http://feriasclick.desarrollo-tecnologico.com/perfiles/' + this.idUsuario + '.jpg';
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+      window.location.reload();
+      this.ref.detectChanges();
+    }, 2000);
   }
 
   obtenerComuna() {
@@ -167,6 +185,21 @@ export class ComerciantePage implements OnInit {
   }
 
   subirImagen() {
+    this.usuario = new Usuario(
+      this.idUsuario,
+      this.rut,
+      this.nombre,
+      this.apellidos,
+      this.nombreUsuario,
+      this.clave,
+      this.correoElectronico,
+      this.tipo,
+      this.idComuna,
+      this.direccion
+    );
+    console.log(this.usuario);
+    const usuariObj = JSON.stringify(this.usuario);
+    this.router.navigate(['carga-imagen-perfil', usuariObj]);
   }
 }
 

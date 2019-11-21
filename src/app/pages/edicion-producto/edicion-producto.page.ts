@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ProductoOfrecido } from '../../producto-ofrecido';
 
 @Component({
   selector: 'app-edicion-producto',
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./edicion-producto.page.scss'],
 })
 export class EdicionProductoPage implements OnInit {
+
+  productoOfrecido: ProductoOfrecido;
 
   // Parámetros de recepción de datos
   productoEditable: any;
@@ -27,12 +30,16 @@ export class EdicionProductoPage implements OnInit {
   // Parámetros de update
   data: Observable<any>;
 
+  // Parámetro de obtención de foto de perfil
+  producto = '';
+
   constructor(
     public activateRoute: ActivatedRoute,
     private http: HttpClient,
     public toastController: ToastController,
     public navCtrl: NavController,
-    private router: Router
+    private router: Router,
+    private ref: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -44,6 +51,9 @@ export class EdicionProductoPage implements OnInit {
     this.usuario = JSON.parse(dataUsuarioRecv);
     console.log(this.productoEditable);
     console.log(this.usuario);
+
+    // Carga de imagen de perfil
+    this.producto = 'http://feriasclick.desarrollo-tecnologico.com/productos/' + this.productoEditable.idProducto + '.jpg';
   }
 
   modificar(formulario) {
@@ -101,6 +111,27 @@ export class EdicionProductoPage implements OnInit {
     this.router.navigate(['/comerciante', this.usuario.nombre, this.usuario.apellidos,
       this.usuario.clave, this.usuario.idComuna, this.usuario.correo, this.usuario.direccion,
       this.usuario.nombreUsuario, this.usuario.rut, this.usuario.tipoUsuario, this.usuario.idUsuario]);
+  }
+
+  subirImagen() {
+    this.router.navigate(['carga-imagen-perfil', ]);
+
+    // Redireccionamiento a Carga de Imagen de Producto
+    this.productoOfrecido = this.productoEditable;
+    const proOfr = JSON.stringify(this.productoOfrecido);
+    const usuariObj = JSON.stringify(this.usuario);
+    this.router.navigate(['cargar-imagen-producto', proOfr, usuariObj]);
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+      window.location.reload();
+      this.ref.detectChanges();
+    }, 2000);
   }
 
 }

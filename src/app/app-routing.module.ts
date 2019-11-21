@@ -21,6 +21,8 @@ const routes: Routes = [
   loadChildren: './pages/repartidor/repartidor.module#RepartidorPageModule' },
   { path: 'carga-imagen-perfil/:usuariObj',
   loadChildren: './pages/carga-imagen-perfil/carga-imagen-perfil.module#CargaImagenPerfilPageModule' },
+  { path: 'carga-imagen-producto/:proOfr/:usuariObj',
+  loadChildren: './pages/carga-imagen-producto/carga-imagen-producto.module#CargaImagenProductoPageModule' },
 
 ];
 

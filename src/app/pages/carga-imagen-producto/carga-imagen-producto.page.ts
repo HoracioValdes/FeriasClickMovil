@@ -7,29 +7,18 @@ import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-carga-imagen-perfil',
-  templateUrl: './carga-imagen-perfil.page.html',
-  styleUrls: ['./carga-imagen-perfil.page.scss'],
+  selector: 'app-carga-imagen-producto',
+  templateUrl: './carga-imagen-producto.page.html',
+  styleUrls: ['./carga-imagen-producto.page.scss'],
 })
-export class CargaImagenPerfilPage implements OnInit {
+export class CargaImagenProductoPage implements OnInit {
 
-  // Parámetro del usuario
+  // Parámetros de recepción de datos
+  productoEditable: any;
   usuario: any;
 
   // Parámetros de consulta a bbdd
   data: Observable<any>;
-
-  // Parámetros del usuario
-  nombre: string;
-  apellidos: string;
-  clave: string;
-  idComuna: string;
-  correoElectronico: string;
-  direccion: string;
-  nombreUsuario: string;
-  rut: string;
-  tipo: string;
-  idUsuario: string;
 
   // Variables de tomar foto
   correctPath = '';
@@ -48,28 +37,19 @@ export class CargaImagenPerfilPage implements OnInit {
 
   ngOnInit() {
     // Recepción de datos
+    const dataProductosRecv = this.activateRoute.snapshot.paramMap.get('proOfr');
     const dataUsuarioRecv = this.activateRoute.snapshot.paramMap.get('usuariObj');
+
     // Parseo de objetos
+    this.productoEditable = JSON.parse(dataProductosRecv);
     this.usuario = JSON.parse(dataUsuarioRecv);
-    console.log(this.usuario);
   }
 
-  saltoPaginaComprador() {
-    // Carga de datos
-    this.nombre = this.usuario.nombre;
-    this.apellidos = this.usuario.apellidos;
-    this.clave = this.usuario.clave;
-    this.idComuna = this.usuario.idComuna;
-    this.correoElectronico = this.usuario.correo;
-    this.direccion = this.usuario.direccion;
-    this.nombreUsuario = this.usuario.nombreUsuario;
-    this.rut = this.usuario.rut;
-    this.tipo = this.usuario.tipoUsuario;
-    this.idUsuario = this.usuario.idUsuario;
+  saltoEdicionProducto() {
     // Envío de datos
-    this.router.navigate(['/comprador', this.nombre, this.apellidos,
-      this.clave, this.idComuna, this.correoElectronico, this.direccion,
-      this.nombreUsuario, this.rut, this.tipo, this.idUsuario]);
+    const usuariObj = JSON.stringify(this.usuario);
+    const proOfr = JSON.stringify(this.productoEditable);
+    this.router.navigate(['edicion-producto', proOfr, usuariObj]);
   }
 
   tomarFoto() {
@@ -117,11 +97,11 @@ export class CargaImagenPerfilPage implements OnInit {
 
   subirFoto() {
     // Subida de imagen
-    const url = 'http://feriasclick.desarrollo-tecnologico.com/perfiles/json.php';
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/productos/json_dos.php';
     // Agrego datos a la consulta
     const postData = new FormData();
     postData.append('file', this.base64Image);
-    postData.append('idUsuario', this.usuario.idUsuario);
+    postData.append('idProducto', this.productoEditable.idProducto);
     const data: Observable<any> = this.http.post(url, postData);
     data.subscribe((result) => {
       console.log(result);
@@ -132,7 +112,7 @@ export class CargaImagenPerfilPage implements OnInit {
   // Toast de foto subida
   async fotoSubida() {
     const toast = await this.toastController.create({
-      message: 'Foto subida correctamente; recargue su perfil',
+      message: 'Foto subida correctamente; recargue el producto',
       duration: 5000
     });
     toast.present();

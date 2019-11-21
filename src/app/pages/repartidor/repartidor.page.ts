@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { Usuario } from '../../usuario';
 
 @Component({
   selector: 'app-repartidor',
@@ -55,12 +56,19 @@ export class RepartidorPage implements OnInit {
   // Parámetro de ejcución regular
   myInterval: any;
 
+  // Parámetro de obtención de foto de perfil
+  perfil = '';
+
+  // Parámetro para cargar imagen de perfil
+  usuario: Usuario;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     public http: HttpClient,
     public toastController: ToastController,
     public router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private ref: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -87,6 +95,20 @@ export class RepartidorPage implements OnInit {
 
     // Obtención de comentarios
     this.obtenerComentarios();
+
+    // Carga de imagen de perfil
+    this.perfil = 'http://feriasclick.desarrollo-tecnologico.com/perfiles/' + this.idUsuario + '.jpg';
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+      window.location.reload();
+      this.ref.detectChanges();
+    }, 2000);
   }
 
   obtenerComentarios() {
@@ -389,6 +411,21 @@ export class RepartidorPage implements OnInit {
   }
 
   subirImagen() {
+    this.usuario = new Usuario(
+      this.idUsuario,
+      this.rut,
+      this.nombre,
+      this.apellidos,
+      this.nombreUsuario,
+      this.clave,
+      this.correoElectronico,
+      this.tipo,
+      this.idComuna,
+      this.direccion
+    );
+    console.log(this.usuario);
+    const usuariObj = JSON.stringify(this.usuario);
+    this.router.navigate(['carga-imagen-perfil', usuariObj]);
   }
 }
 
