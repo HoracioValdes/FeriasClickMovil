@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Carga tu imagen de perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="this.base64Image.length > 0">
+    <ion-avatar>
+      <!--<img [src]="foto">-->
+      <img [src]="base64Image" />
+    </ion-avatar>
+  </ion-list>
+
+  <ion-list>
+    <ion-button fill="clear" expand="full" color="tertiary" (click)="tomarFoto()">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      Tomar foto
+    </ion-button>
+  </ion-list>
+
+  <ion-list>
+    <ion-button fill="clear" expand="full" color="tertiary" (click)="seleccionarFoto()">
+      <ion-icon slot="start" name="albums"></ion-icon>
+      Seleccione foto
+    </ion-button>
+  </ion-list>
+
+  <ion-list>
+    <ion-button fill="clear" expand="full" color="tertiary" (click)="subirFoto()">
+      <ion-icon slot="start" name="arrow-dropup"></ion-icon>
+      Subir foto
+    </ion-button>
+  </ion-list>
+
+  <ion-list>
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+      (click)="saltoPaginaComerciante()">
+      Volver
+    </ion-button>
+  </ion-list>
+
+</ion-content>

@@ -199,7 +199,7 @@ export class ComerciantePage implements OnInit {
     );
     console.log(this.usuario);
     const usuariObj = JSON.stringify(this.usuario);
-    this.router.navigate(['carga-imagen-perfil', usuariObj]);
+    this.router.navigate(['carga-imagen-perfil-comerciante', usuariObj]);
   }
 }
 

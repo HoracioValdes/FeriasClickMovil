@@ -28,6 +28,7 @@
         <ion-text>
           <h4>{{ productoComprado.nombre }}</h4>
         </ion-text>
+        <ion-img src="http://feriasclick.desarrollo-tecnologico.com/productos/{{productoComprado.idProducto}}.jpg"></ion-img>
         <ion-text>
           <h6>Monto: $ {{ productoComprado.monto }}</h6>
         </ion-text>
@@ -39,11 +40,17 @@
     <ion-item>
       <ion-label>
         <ion-text>
-          <h4><b>Pago: $ {{ montoCompra }}</b></h4>
+          <h4><b>Pago Despacho: $ {{ montoReparto }}</b></h4>
+        </ion-text>
+        <ion-text>
+          <ion-text>
+            <h4><b>Pago Ferias Click: $ {{ montoGanancia }}</b></h4>
+          </ion-text>
+          <h4><b>Pago Total: $ {{ montoCompra }}</b></h4>
         </ion-text>
       </ion-label>
     </ion-item>
-    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;" [disabled]="boton"
       (click)="hacerPago()">
       Pagar
     </ion-button>

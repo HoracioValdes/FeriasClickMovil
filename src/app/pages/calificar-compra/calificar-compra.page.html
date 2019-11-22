@@ -15,6 +15,9 @@
         <ion-text>
           <h4>Nombre del repartidor: <b>{{ despacho.NOMBRE_REPARTIDOR }} {{ despacho.APELLIDOS_REPARTIDOR }}</b></h4>
         </ion-text>
+        <ion-avatar>
+          <ion-img src="http://feriasclick.desarrollo-tecnologico.com/perfiles/{{despacho.ID_REPARTIDOR}}.jpg"></ion-img>
+        </ion-avatar>
         <ion-text>
           <h4>Monto de la compra: <b>$ {{ despacho.MONTO_COMPRA }}</b></h4>
         </ion-text>
@@ -33,6 +36,7 @@
         <ion-text>
           <h4>{{ producto.NOMBRE_PRODUCTO }}</h4>
         </ion-text>
+        <ion-img src="http://feriasclick.desarrollo-tecnologico.com/productos/{{producto.ID_PRODUCTO}}.jpg"></ion-img>
         <ion-text>
           <h6>Costo: $ {{ producto.COSTO_PRODUCTO }}</h6>
         </ion-text>

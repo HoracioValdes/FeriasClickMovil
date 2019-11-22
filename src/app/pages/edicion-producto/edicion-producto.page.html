@@ -6,11 +6,6 @@
 
 <ion-content padding>
 
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content>
-    </ion-refresher-content>
-  </ion-refresher>
-
   <h3>Datos de usuario/a</h3>
 
   <ion-list>
@@ -32,9 +27,6 @@
   <h3>Edición de {{ productoEditable.nombreProducto }}</h3>
   
   <ion-list>
-    <ion-avatar>
-      <ion-img [src]="producto"></ion-img>
-    </ion-avatar>
     <ion-button fill="clear" color="tertiary" slot="start" style="margin-bottom: 10px; margin-top: 15px;"
       (click)="subirImagen()">
       Subir imagen de producto

@@ -23,6 +23,12 @@ const routes: Routes = [
   loadChildren: './pages/carga-imagen-perfil/carga-imagen-perfil.module#CargaImagenPerfilPageModule' },
   { path: 'carga-imagen-producto/:proOfr/:usuariObj',
   loadChildren: './pages/carga-imagen-producto/carga-imagen-producto.module#CargaImagenProductoPageModule' },
+  { path: 'carga-imagen-perfil-comerciante/:usuariObj',
+  loadChildren: './pages/carga-imagen-perfil-comerciante/carga-imagen-perfil-comerciante.module#CargaImagenPerfilComerciantePageModule' },
+  { path: 'carga-imagen-perfil-repartidor/:usuariObj',
+  loadChildren: './pages/carga-imagen-perfil-repartidor/carga-imagen-perfil-repartidor.module#CargaImagenPerfilRepartidorPageModule' },
+
+
 
 ];
 

@@ -49,6 +49,7 @@ export class RepartidorPage implements OnInit {
   fechaCompraCliente: any;
   montoCompraCliente: any;
   ganaciaCompra: any;
+  idCliente: any;
 
   // Parametros de obtención de listado de productos en entrega
   listaProductosEntrega: any;
@@ -227,6 +228,7 @@ export class RepartidorPage implements OnInit {
         this.direccionCliente = this.productoEnEntrega[0].DIRECCION;
         this.fechaCompraCliente = this.productoEnEntrega[0].FECHA_HORA_COMPRA;
         this.montoCompraCliente = this.productoEnEntrega[0].MONTO_COMPRA;
+        this.idCliente = this.productoEnEntrega[0].ID_USUARIO;
         this.entrega = true;
         this.obtenerProductosDeCompraEnEntrega();
       } else {
@@ -425,7 +427,7 @@ export class RepartidorPage implements OnInit {
     );
     console.log(this.usuario);
     const usuariObj = JSON.stringify(this.usuario);
-    this.router.navigate(['carga-imagen-perfil', usuariObj]);
+    this.router.navigate(['carga-imagen-perfil-repartidor', usuariObj]);
   }
 }
 

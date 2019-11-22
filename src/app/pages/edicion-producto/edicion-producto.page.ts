@@ -114,24 +114,11 @@ export class EdicionProductoPage implements OnInit {
   }
 
   subirImagen() {
-    this.router.navigate(['carga-imagen-perfil', ]);
-
     // Redireccionamiento a Carga de Imagen de Producto
     this.productoOfrecido = this.productoEditable;
     const proOfr = JSON.stringify(this.productoOfrecido);
     const usuariObj = JSON.stringify(this.usuario);
-    this.router.navigate(['cargar-imagen-producto', proOfr, usuariObj]);
-  }
-
-  doRefresh(event) {
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-      window.location.reload();
-      this.ref.detectChanges();
-    }, 2000);
+    this.router.navigate(['carga-imagen-producto', proOfr, usuariObj]);
   }
 
 }

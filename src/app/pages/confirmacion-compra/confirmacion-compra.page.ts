@@ -16,6 +16,8 @@ export class ConfirmacionCompraPage implements OnInit {
   listaProductos: any;
   usuario: any;
   montoCompra = 0;
+  montoReparto = 0;
+  montoGanancia = 0;
 
   // Parámetros de BBDD
   data: Observable<any>;
@@ -42,6 +44,9 @@ export class ConfirmacionCompraPage implements OnInit {
   tipo: string;
   idUsuario: string;
 
+  // Activar o desactivar botón de pago
+  boton = false;
+
   constructor(
     public activateRoute: ActivatedRoute,
     private http: HttpClient,
@@ -60,12 +65,30 @@ export class ConfirmacionCompraPage implements OnInit {
     console.log(typeof (this.usuario));
     console.log(this.listaProductos);
     console.log(this.usuario);
+
+    // Cálculo de montos
+
     for (const producto of this.listaProductos) {
+      // Monto de despacho es sumatoria de el valor por peso (1 kg)
+      const valorKilo = 0.3;
+      this.montoReparto = this.montoReparto + ((producto.monto / producto.cantidad) * valorKilo);
       this.montoCompra = this.montoCompra + producto.monto;
       console.log(producto);
     }
-    this.montoCompra = (this.montoCompra * 1.02) + 6000;
+    // Cobro por transacción de Ferias Click, pago de Captura de Despacho y Valor de Distancia Cubierta
+    const cobroTransaccion = 1.03;
+    const inicialDespacho = 400;
+    const valorDesplazamiento = 40;
+    this.montoReparto = this.montoReparto + inicialDespacho;
+    // Cambiar
+    const distancia = this.usuario.idUsuario;
+    console.log(distancia);
+    this.montoReparto = this.montoReparto + (distancia * valorDesplazamiento);
+    this.montoGanancia = this.montoCompra * 0.03;
+    console.log(this.montoGanancia);
+    this.montoCompra = (this.montoCompra * cobroTransaccion) + this.montoReparto;
     console.log(this.montoCompra);
+
   }
 
   hacerPago() {
@@ -77,6 +100,8 @@ export class ConfirmacionCompraPage implements OnInit {
     const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=4';
     const postData = new FormData();
     postData.append('monto', this.montoCompra.toString());
+    postData.append('montoReparto', this.montoReparto.toString());
+    postData.append('montoGanancia', this.montoGanancia.toString());
     postData.append('idUsuario', this.usuario.idUsuario);
     postData.append('fecha', fechaHoraFormato);
     this.data = this.http.post(url, postData);
@@ -104,6 +129,7 @@ export class ConfirmacionCompraPage implements OnInit {
               this.postDataTres.append('idCompra', this.idCompra);
               this.postDataTres.append('idProducto', producto.idProducto);
               this.postDataTres.append('cantidadProducto', producto.cantidad);
+              this.postDataTres.append('montoProducto', producto.monto.toString());
               this.dataTres = this.http.post(urlTres, this.postDataTres);
               this.dataTres.subscribe(dataTres => {
                 if (dataTres === true) {
@@ -134,6 +160,9 @@ export class ConfirmacionCompraPage implements OnInit {
                           console.log(dataCinco);
                           this.listaProductos = [];
                           this.montoCompra = 0;
+                          this.montoReparto = 0;
+                          this.montoGanancia = 0;
+                          this.boton = true;
                         } else {
                           console.log('No se pudo actualizar la cantidad');
                         }

@@ -36,6 +36,9 @@
   <ion-list>
     <h3>Despacho en Entrega</h3>
     <p>Nombre de cliente: <b>{{ nombreCliente }}</b></p>
+    <ion-avatar>
+      <ion-img src="http://feriasclick.desarrollo-tecnologico.com/perfiles/{{idCliente}}.jpg" *ngIf="idCliente != null"></ion-img>
+    </ion-avatar>
     <p>Comuna: <b>{{ comunaCliente }}</b></p>
     <p>Direccion: <b>{{ direccionCliente }}</b></p>
     <p>Fecha y Hora de Compra: <b>{{ fechaCompraCliente }}</b></p>
@@ -49,6 +52,7 @@
         <ion-text>
           <p>Nombre producto: <b>{{ productoEntrega.NOMBRE_PRODUCTO }}</b></p>
         </ion-text>
+        <ion-img src="http://feriasclick.desarrollo-tecnologico.com/productos/{{productoEntrega.ID_PRODUCTO}}.jpg"></ion-img>
         <ion-text>
           <p>Nombre de comerciante: <b>{{ productoEntrega.NOMBRE }} {{ productoEntrega.APELLIDOS }}</b></p>
         </ion-text>
@@ -75,6 +79,9 @@
         <ion-text>
           <p>Comprador/a: <b>{{ comentario.NOMBRE_COMPRADOR }} {{ comentario.APELLIDOS_COMPRADOR }}</b></p>
         </ion-text>
+        <ion-avatar>
+          <ion-img src="http://feriasclick.desarrollo-tecnologico.com/perfiles/{{comentario.ID_COMPRADOR}}.jpg"></ion-img>
+        </ion-avatar>
         <ion-text>
           <p>Dirección: <b>{{ comentario.DIRECCION_COMPRADOR }} </b></p>
         </ion-text>
@@ -92,6 +99,9 @@
         <ion-text>
           <p>Nombre de cliente: <b>{{ compra.NOMBRE }} {{ compra.APELLIDOS }}</b></p>
         </ion-text>
+        <ion-avatar>
+          <ion-img src="http://feriasclick.desarrollo-tecnologico.com/perfiles/{{compra.ID_USUARIO}}.jpg"></ion-img>
+        </ion-avatar>
         <ion-text>
           <p>Comuna: <b>{{ compra.NOMBRE_COMUNA }}</b></p>
         </ion-text>
