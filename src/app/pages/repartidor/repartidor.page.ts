@@ -42,6 +42,7 @@ export class RepartidorPage implements OnInit {
   // Parámetros de obtención de compra en entrega
   ganancia: any = 0;
   productoEnEntrega: any;
+  productosEnEntrega: any;
   entrega: any = false;
   nombreCliente: any;
   comunaCliente: any;
@@ -53,6 +54,8 @@ export class RepartidorPage implements OnInit {
 
   // Parametros de obtención de listado de productos en entrega
   listaProductosEntrega: any;
+  matrizProductosEntrega: any = [];
+  contadorMatriz = 1;
 
   // Parámetro de ejcución regular
   myInterval: any;
@@ -86,16 +89,19 @@ export class RepartidorPage implements OnInit {
     this.idUsuario = this.activatedRoute.snapshot.paramMap.get('idUsuario');
 
     // Consulta de comuna
-    this.obtenerComuna();
+    // this.obtenerComuna();
 
     // Obtención de despachos pendientes
-    this.obtenerDespachosPendientes();
+    // this.obtenerDespachosPendientes();
 
     // Obtención de despacho pendiente
-    this.obtenerCompraEnEntrega();
+    // this.obtenerCompraEnEntrega();
+
+    // Obtención de despachos pendientes
+    // this.obtenerComprasEnEntrega();
 
     // Obtención de comentarios
-    this.obtenerComentarios();
+    // this.obtenerComentarios();
 
     // Carga de imagen de perfil
     this.perfil = 'http://feriasclick.desarrollo-tecnologico.com/perfiles/' + this.idUsuario + '.jpg';
@@ -175,28 +181,24 @@ export class RepartidorPage implements OnInit {
   }
 
   enEntrega(compra) {
-    if (this.entrega === false) {
-      console.log('En entrega');
-      // Operación en la base de datos
-      // Carga de la base de datos
-      const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=18';
-      const postData = new FormData();
-      postData.append('idCompra', compra.ID_COMPRA);
-      this.data = this.http.post(url, postData);
-      this.data.subscribe(data => {
-        if (data === true) {
-          console.log('Compra alterada "En entrega"');
-          this.insertarDespacho(compra);
-          // this.obtenerCompraEnEntrega();
-          // this.obtenerDespachosPendientes();
-          this.cargarPagina();
-        } else {
-          console.log('Error en la alteracion de compra');
-        }
-      });
-    } else {
-      this.repartidorOcupado();
-    }
+    console.log('En entrega');
+    // Operación en la base de datos
+    // Carga de la base de datos
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=18';
+    const postData = new FormData();
+    postData.append('idCompra', compra.ID_COMPRA);
+    this.data = this.http.post(url, postData);
+    this.data.subscribe(data => {
+      if (data === true) {
+        console.log('Compra alterada "En entrega"');
+        this.insertarDespacho(compra);
+        // this.obtenerCompraEnEntrega();
+        // this.obtenerDespachosPendientes();
+        this.cargarPagina();
+      } else {
+        console.log('Error en la alteracion de compra');
+      }
+    });
   }
 
   // Toast de repartidor ocupado
@@ -237,6 +239,33 @@ export class RepartidorPage implements OnInit {
     });
   }
 
+  obtenerComprasEnEntrega() {
+    this.productosEnEntrega = 0;
+    this.matrizProductosEntrega = [];
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=31';
+    const postData = new FormData();
+    // Agrego datos a la consulta
+    postData.append('idUsuario', this.idUsuario);
+    // Consulta
+    this.data = this.http.post(url, postData);
+    // Recogida de datos
+    this.data.subscribe(data => {
+      this.productosEnEntrega = data;
+      console.log(this.productosEnEntrega);
+      // Revisión de resultado
+      if (data.length >= 1) {
+
+        // Obtencion de productos
+        for (const producto of this.productosEnEntrega) {
+          console.log(producto.ID_COMPRA);
+          this.obtenerProductosDeCompraEnEntregaMatriz(producto.ID_COMPRA);
+        }
+      } else {
+        console.log('No hay compras pendientes de entrega');
+      }
+    });
+  }
+
   obtenerProductosDeCompraEnEntrega() {
     const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=21';
     const postData = new FormData();
@@ -257,12 +286,36 @@ export class RepartidorPage implements OnInit {
     });
   }
 
-  confirmarEntrega() {
-    if (this.entrega === true) {
+  obtenerProductosDeCompraEnEntregaMatriz(idCompra) {
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=21';
+    const postData = new FormData();
+    // Agrego datos a la consulta
+    postData.append('idCompra', idCompra);
+    // Consulta
+    this.data = this.http.post(url, postData);
+    // Recogida de datos
+    this.data.subscribe(data => {
+
+      for (const datos of data) {
+        this.matrizProductosEntrega.push(datos);
+      }
+      console.log(this.matrizProductosEntrega);
+      // Revisión de resultado
+      if (data.length >= 1) {
+        console.log('Lista de productos obtenida');
+      } else {
+        console.log('Lista de productos no obtenida');
+      }
+    });
+  }
+
+  confirmarEntrega(idCompra) {
+    console.log(this.matrizProductosEntrega.length);
+    if (this.matrizProductosEntrega.length !== 0) {
       // Carga de la base de datos
       const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=22';
       const postData = new FormData();
-      postData.append('idCompra', this.productoEnEntrega[0].ID_COMPRA);
+      postData.append('idCompra', idCompra);
       this.data = this.http.post(url, postData);
       this.data.subscribe(data => {
         if (data === true) {
@@ -273,12 +326,14 @@ export class RepartidorPage implements OnInit {
           const postDataDos = new FormData();
           console.log(this.fechaHoraFormato);
           postDataDos.append('fecha', this.fechaHoraFormato);
-          postDataDos.append('idCompra', this.productoEnEntrega[0].ID_COMPRA);
+          postDataDos.append('idCompra', idCompra);
           this.dataDos = this.http.post(urlDos, postDataDos);
           this.dataDos.subscribe(dataDos => {
             if (dataDos === true) {
               this.entregaRealizada();
-              this.cargarPagina();
+              setTimeout(() => {
+                this.cargarPagina();
+              }, 5000);
             } else {
               this.entregaNoRealizada();
             }
@@ -381,8 +436,8 @@ export class RepartidorPage implements OnInit {
     // Obtención de despachos pendientes
     this.obtenerDespachosPendientes();
 
-    // Obtención de despacho pendiente
-    this.obtenerCompraEnEntrega();
+    // Obtención de despachos pendientes
+    this.obtenerComprasEnEntrega();
 
     // Obtención de comentarios
     this.obtenerComentarios();

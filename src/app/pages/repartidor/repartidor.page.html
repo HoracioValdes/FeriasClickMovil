@@ -34,38 +34,60 @@
     <p>{{ direccion }}</p>
   </ion-row>
   <ion-list>
-    <h3>Despacho en Entrega</h3>
-    <p>Nombre de cliente: <b>{{ nombreCliente }}</b></p>
-    <ion-avatar>
-      <ion-img src="http://feriasclick.desarrollo-tecnologico.com/perfiles/{{idCliente}}.jpg" *ngIf="idCliente != null"></ion-img>
-    </ion-avatar>
-    <p>Comuna: <b>{{ comunaCliente }}</b></p>
-    <p>Direccion: <b>{{ direccionCliente }}</b></p>
-    <p>Fecha y Hora de Compra: <b>{{ fechaCompraCliente }}</b></p>
-    <p>Monto de Compra: <b>{{ montoCompraCliente }}</b></p>
-    <p>Ganancia: <b>$ {{ ganancia}}</b></p>
-  </ion-list>
-  <ion-list>
-    <h3>Lista de Productos del Despacho</h3>
-    <ion-item *ngFor="let productoEntrega of listaProductosEntrega" style="margin-top: 20px;">
+    <h3>Lista de Despachos en Entrega</h3>
+    <ion-item *ngFor="let compra of productosEnEntrega" style="margin-top: 20px;">
       <ion-label text-wrap>
-        <ion-text>
-          <p>Nombre producto: <b>{{ productoEntrega.NOMBRE_PRODUCTO }}</b></p>
-        </ion-text>
-        <ion-img src="http://feriasclick.desarrollo-tecnologico.com/productos/{{productoEntrega.ID_PRODUCTO}}.jpg"></ion-img>
-        <ion-text>
-          <p>Nombre de comerciante: <b>{{ productoEntrega.NOMBRE }} {{ productoEntrega.APELLIDOS }}</b></p>
-        </ion-text>
-        <ion-text>
-          <p>Cantidad: <b>{{ productoEntrega.CANTIDAD_PRODUCTO }}</b></p>
-        </ion-text>
+        <p>Nombre de cliente: <b>{{ compra.NOMBRE }}</b></p>
+        <ion-avatar>
+          <ion-img src="http://feriasclick.desarrollo-tecnologico.com/perfiles/{{compra.ID_USUARIO}}.jpg">
+          </ion-img>
+        </ion-avatar>
+        <p>Comuna: <b>{{ compra.NOMBRE_COMUNA }}</b></p>
+        <p>Direccion: <b>{{ compra.DIRECCION }}</b></p>
+        <p>Fecha y Hora de Compra: <b>{{ compra.FECHA_HORA_COMPRA }}</b></p>
+        <p>Monto de Compra: <b>$ {{ compra.MONTO_COMPRA }}</b></p>
+        <p>Ganancia: <b>$ {{ compra.MONTO_REPARTO }}</b></p>
+
+        <h3><b>Productos</b></h3>
+        <ion-list>
+          <ng-container *ngFor="let entrega of matrizProductosEntrega" style="margin-top: 20px;">
+            <ng-container *ngIf="entrega.ID_COMPRA ===  compra.ID_COMPRA">
+
+              <ion-label text-wrap>
+                <ion-text>
+                  <p>Nombre producto: <b>{{ entrega.NOMBRE_PRODUCTO }}</b></p>
+                </ion-text>
+                <ion-text>
+                  <p>Id de compra: <b>{{ entrega.ID_COMPRA }}</b></p>
+                </ion-text>
+
+                <ion-thumbnail slot="start">
+                  <ion-img src="http://feriasclick.desarrollo-tecnologico.com/perfiles/{{entrega.ID_USUARIO}}.jpg"></ion-img>
+                </ion-thumbnail>
+                <ion-text>
+                  <p>Puesto: <b>{{ entrega.PUESTO }}</b></p>
+                </ion-text>
+                <ion-text>
+                  <p>Nombre de comerciante: <b>{{ entrega.NOMBRE }} {{ entrega.APELLIDOS }}</b></p>
+                </ion-text>
+                <ion-img src="http://feriasclick.desarrollo-tecnologico.com/productos/{{entrega.ID_PRODUCTO}}.jpg"></ion-img>
+
+                <ion-text>
+                  <p>Cantidad: <b>{{ entrega.CANTIDAD_PRODUCTO }}</b></p>
+                </ion-text>
+              </ion-label>
+
+            </ng-container>
+          </ng-container>
+        </ion-list>
+        <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+          (click)="confirmarEntrega(compra.ID_COMPRA)">
+          Entrega
+        </ion-button>
       </ion-label>
     </ion-item>
-    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
-      (click)="confirmarEntrega()">
-      Entrega
-    </ion-button>
   </ion-list>
+
   <ion-list>
     <h3>Lista de Comentarios Recibidos</h3>
     <ion-item *ngFor="let comentario of listaComentarios" style="margin-top: 20px;">

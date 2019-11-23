@@ -17,6 +17,7 @@ import { Storage } from '@ionic/storage';
 export class CompradorPage implements OnInit {
   // Parámetros de consulta de productos
   productos: any = [];
+  tipoProductos: any = [];
   despachos: any = [];
   data: Observable<any>;
   // Parametros de usuario
@@ -79,6 +80,9 @@ export class CompradorPage implements OnInit {
     // Consulta de comuna
     this.obtenerComuna();
 
+    // Consulta de tipos de productos
+    this.obtenerTiposProductos();
+
     // Consulta de productos
     this.obtenerProductos();
 
@@ -100,7 +104,8 @@ export class CompradorPage implements OnInit {
         producto.ID_PRODUCTO,
         producto.NOMBRE_PRODUCTO,
         producto.COSTO_PRODUCTO * this.cantidad,
-        this.cantidad
+        this.cantidad,
+        producto.PESO_PRODUCTO
       );
       this.sumaCompra = this.sumaCompra + this.productoComprado.monto;
       console.log(this.productosComprados.push(this.productoComprado));
@@ -218,7 +223,7 @@ export class CompradorPage implements OnInit {
   ionViewDidEnter() {
     console.log('Volvi');
     // Carga de intervalo
-    this.myInterval = setInterval(this.repetir, 60000);
+    this.myInterval = setInterval(this.repetir, 300000);
     // Consulta de productos
     this.obtenerProductos();
     // Consulta de despachos
@@ -241,6 +246,20 @@ export class CompradorPage implements OnInit {
     this.data.subscribe(data => {
       this.productos = data;
       console.log(this.productos);
+    });
+  }
+
+  obtenerTiposProductos() {
+    // Consulta de productos
+    const url =
+      'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=32';
+    const postData = new FormData();
+    // Consulta
+    this.data = this.http.post(url, postData);
+    // Recogida de datos
+    this.data.subscribe(data => {
+      this.tipoProductos = data;
+      console.log(this.tipoProductos);
     });
   }
 

@@ -43,11 +43,17 @@
       <ion-label slot="start">0</ion-label>
       <ion-label slot="end">100</ion-label>
     </ion-range>
+    <ion-label>Peso unidad actual (gramos): {{ pesoProducto }}</ion-label>
+    <ion-range #rango min="0" max="20000" step="250" color="tertiary" pin="true" [(ngModel)]="model.pesoProducto"
+      name="cantidadProducto" required>
+      <ion-label slot="start">0</ion-label>
+      <ion-label slot="end">20000</ion-label>
+    </ion-range>
     <ion-label>Valor actual: {{ productoEditable.costoProducto }}</ion-label>
-    <ion-range #rango min="0" max="50000" step="50" color="tertiary" pin="true" [(ngModel)]="model.costoProducto"
+    <ion-range #rango min="0" max="20000" step="50" color="tertiary" pin="true" [(ngModel)]="model.costoProducto"
       name="nombreProducto" required>
       <ion-label slot="start">0</ion-label>
-      <ion-label slot="end">50000</ion-label>
+      <ion-label slot="end">20000</ion-label>
     </ion-range>
     <ion-row class="top-20">
       <ion-col>

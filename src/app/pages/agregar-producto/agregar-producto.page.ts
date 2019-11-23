@@ -40,7 +40,8 @@ export class AgregarProductoPage implements OnInit {
     nombreProducto: '',
     cantidadProducto: '',
     costoProducto: '',
-    idTipo: ''
+    idTipo: '',
+    pesoProducto: ''
   };
 
   constructor(
@@ -84,6 +85,7 @@ export class AgregarProductoPage implements OnInit {
     postData.append('costoProducto', this.model.costoProducto);
     postData.append('idTipo', this.model.idTipo);
     postData.append('idUsuario', this.usuario.idUsuario);
+    postData.append('pesoProducto', this.model.pesoProducto);
     this.data = this.http.post(url, postData);
     this.data.subscribe(data => {
       console.log(data);

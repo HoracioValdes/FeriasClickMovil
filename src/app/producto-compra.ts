@@ -3,6 +3,7 @@ export class ProductoCompra {
         public idProducto: number,
         public nombre: string,
         public monto: number,
-        public cantidad: number
+        public cantidad: number,
+        public pesoProducto: number
     ) {}
 }

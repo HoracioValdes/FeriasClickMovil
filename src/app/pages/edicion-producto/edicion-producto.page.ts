@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ProductoOfrecido } from '../../producto-ofrecido';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-edicion-producto',
@@ -16,6 +17,9 @@ export class EdicionProductoPage implements OnInit {
 
   productoOfrecido: ProductoOfrecido;
 
+  // Parámetros de peso de producto
+  pesoProducto: any;
+
   // Parámetros de recepción de datos
   productoEditable: any;
   usuario: any;
@@ -24,7 +28,8 @@ export class EdicionProductoPage implements OnInit {
   model = {
     nombreProducto: '',
     cantidadProducto: '',
-    costoProducto: ''
+    costoProducto: '',
+    pesoProducto: ''
   };
 
   // Parámetros de update
@@ -56,6 +61,24 @@ export class EdicionProductoPage implements OnInit {
     this.producto = 'http://feriasclick.desarrollo-tecnologico.com/productos/' + this.productoEditable.idProducto + '.jpg';
   }
 
+  // Obtener peso de producto
+  obtenerpeso() {
+    const url = 'http://feriasclick.desarrollo-tecnologico.com/ferias/registro.php?opcion=33';
+    const postData = new FormData();
+    console.log(this.productoEditable.idProducto);
+    postData.append('idProducto', this.productoEditable.idProducto);
+    this.data = this.http.post(url, postData);
+    this.data.subscribe(data => {
+      console.log(data);
+      this.pesoProducto = data[0].PESO_PRODUCTO;
+      console.log(this.pesoProducto);
+    });
+  }
+
+  ionViewDidEnter() {
+    this.obtenerpeso();
+  }
+
   modificar(formulario) {
     console.log('Nombre: ' + this.model.nombreProducto);
     console.log('Costo: ' + this.model.costoProducto);
@@ -68,6 +91,7 @@ export class EdicionProductoPage implements OnInit {
     postData.append('nombreProducto', this.model.nombreProducto.toUpperCase());
     postData.append('cantidadProducto', this.model.cantidadProducto);
     postData.append('costoProducto', this.model.costoProducto);
+    postData.append('pesoProducto', this.model.pesoProducto);
     this.data = this.http.post(url, postData);
     this.data.subscribe(data => {
       if (data === true) {
@@ -104,6 +128,7 @@ export class EdicionProductoPage implements OnInit {
     this.productoEditable.nombreProducto = this.model.nombreProducto.toUpperCase();
     this.productoEditable.cantidadProducto = this.model.cantidadProducto;
     this.productoEditable.costoProducto = this.model.costoProducto;
+    this.pesoProducto = this.model.pesoProducto;
   }
 
   volver() {

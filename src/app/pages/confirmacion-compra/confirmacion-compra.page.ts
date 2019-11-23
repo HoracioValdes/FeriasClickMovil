@@ -70,15 +70,15 @@ export class ConfirmacionCompraPage implements OnInit {
 
     for (const producto of this.listaProductos) {
       // Monto de despacho es sumatoria de el valor por peso (1 kg)
-      const valorKilo = 0.3;
-      this.montoReparto = this.montoReparto + ((producto.monto / producto.cantidad) * valorKilo);
+      const valorKilo = 100;
+      this.montoReparto = this.montoReparto + ((producto.pesoProducto / 1000) * valorKilo);
       this.montoCompra = this.montoCompra + producto.monto;
       console.log(producto);
     }
     // Cobro por transacción de Ferias Click, pago de Captura de Despacho y Valor de Distancia Cubierta
     const cobroTransaccion = 1.03;
     const inicialDespacho = 400;
-    const valorDesplazamiento = 40;
+    const valorDesplazamiento = 70;
     this.montoReparto = this.montoReparto + inicialDespacho;
     // Cambiar
     const distancia = this.usuario.idUsuario;
@@ -87,6 +87,9 @@ export class ConfirmacionCompraPage implements OnInit {
     this.montoGanancia = this.montoCompra * 0.03;
     console.log(this.montoGanancia);
     this.montoCompra = (this.montoCompra * cobroTransaccion) + this.montoReparto;
+    // Cobro por servicio de reparto
+    this.montoCompra = this.montoCompra + (this.montoReparto * 0.03);
+    this.montoGanancia = this.montoGanancia + (this.montoReparto * 0.03);
     console.log(this.montoCompra);
 
   }

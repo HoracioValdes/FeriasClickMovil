@@ -32,44 +32,62 @@
   <ion-row>
     <p>{{ direccion }}</p>
   </ion-row>
-  <ion-list>
+
+    <ion-list>
     <h3>Productos a comprar</h3>
     <p>Monto Total $ {{ sumaCompra }}</p>
     <ion-item *ngFor="let productoComprado of productosComprados" style="margin-top: 20px;">
       <p>{{ productoComprado.nombre }} monto: ${{ productoComprado.monto }}</p>
     </ion-item>
   </ion-list>
+
   <ion-list>
-    <ion-item *ngFor="let producto of productos" style="margin-top: 20px;">
+    <h3>Lista de Productos Disponibles</h3>
+    <ion-item *ngFor="let tipo of tipoProductos" style="margin-top: 20px;" color="tertiary">
       <ion-label text-wrap>
-        <ion-text>
-          <h6>{{ producto.NOMBRE_PRODUCTO }}</h6>
-        </ion-text>
-        <ion-img src="http://feriasclick.desarrollo-tecnologico.com/productos/{{producto.ID_PRODUCTO}}.jpg"></ion-img>
-        <ion-text>
-          <p>Costo por kilo o unidad: <b>${{ producto.COSTO_PRODUCTO }}</b></p>
-        </ion-text>
-        <ion-text>
-          <p>Valoraciones del producto: <b>{{ producto.VALORACION_PRODUCTO }}</b></p>
-        </ion-text>
-        <div item-content>
-          <ion-range name="range" min="0" max="{{ producto.CANTIDAD_PRODUCTO }}" color="tertiary" pin="true"
-            (ionChange)="cambioRango( $event )">
-            <ion-label slot="start">0</ion-label>
-            <ion-label slot="end">{{ producto.CANTIDAD_PRODUCTO}}</ion-label>
-          </ion-range>
-        </div>
-        <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px;" (click)="agregar(producto)"
-          (ionFocus)="hola()" (ionBlur)="resetearValor()">
-          Agregar
-        </ion-button>
+        <h2>{{ tipo.NOMBRE_TIPO }}</h2>
+
+        <ion-list>
+          <ng-container *ngFor="let producto of productos" style="margin-top: 20px;">
+            <ng-container *ngIf="producto.ID_TIPO ===  tipo.ID_TIPO">
+
+              <ion-label text-wrap>
+                <ion-text>
+                  <h6 style="color:black;">{{ producto.NOMBRE_PRODUCTO }}</h6>
+                </ion-text>
+                <ion-img src="http://feriasclick.desarrollo-tecnologico.com/productos/{{producto.ID_PRODUCTO}}.jpg"></ion-img>
+                <ion-text>
+                  <p style="color:black;">Costo por kilo o unidad: <b>${{ producto.COSTO_PRODUCTO }}</b></p>
+                </ion-text>
+                <ion-text>
+                  <p style="color:black;">Valoraciones del producto: <b>{{ producto.VALORACION_PRODUCTO }}</b></p>
+                </ion-text>
+                <div item-content>
+                  <ion-range name="range" min="0" max="{{ producto.CANTIDAD_PRODUCTO }}" color="tertiary" pin="true"
+                    (ionChange)="cambioRango( $event )">
+                    <ion-label style="color:black;" slot="start">0</ion-label>
+                    <ion-label style="color:black;" slot="end">{{ producto.CANTIDAD_PRODUCTO}}</ion-label>
+                  </ion-range>
+                </div>
+                <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px;" (click)="agregar(producto)"
+                  (ionFocus)="hola()" (ionBlur)="resetearValor()">
+                  Agregar
+                </ion-button>
+              </ion-label>
+
+            </ng-container>
+          </ng-container>
+        </ion-list>
       </ion-label>
     </ion-item>
+
     <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
       (click)="confirmarCompra()">
       Realizar pago
     </ion-button>
+
   </ion-list>
+
   <ion-list>
     <h3>Despachos por calificar</h3>
     <ion-item *ngFor="let despacho of despachos" style="margin-top: 20px;">
