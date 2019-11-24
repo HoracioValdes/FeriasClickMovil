@@ -83,6 +83,7 @@ export class CalificarCompraPage implements OnInit {
 
   // Variables de desactivación de elementos de la interfaz
   isReadOnly = false;
+  deshabilitarBoton = false;
 
   constructor(
     public activateRoute: ActivatedRoute,
@@ -170,6 +171,7 @@ export class CalificarCompraPage implements OnInit {
 
   deshabilitar() {
     this.isReadOnly = true;
+    this.deshabilitarBoton = true;
   }
 
   ajusteCalificacion() {

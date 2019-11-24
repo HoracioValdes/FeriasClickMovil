@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Ofrece tus productos</ion-title>
+  <ion-toolbar color="verde-marco">
+    <ion-title><b>Ofrece tus productos</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,31 +10,32 @@
     <ion-refresher-content>
     </ion-refresher-content>
   </ion-refresher>
-  
-  <ion-list>
-    <ion-avatar>
-      <ion-img [src]="perfil"></ion-img>
-    </ion-avatar>
-    <ion-button fill="clear" color="tertiary" slot="start" style="margin-bottom: 10px; margin-top: 15px;"
-      (click)="subirImagen()">
-      Subir imagen de perfil
-    </ion-button>
-  </ion-list>
 
-  <ion-row>
-    <h4><b>{{ nombre }} {{ apellidos }}</b></h4>
-  </ion-row>
-  <ion-row>
-    <p>{{ correoElectronico }}</p>
-  </ion-row>
-  <ion-row>
-    <p>{{ nombreComuna }}</p>
-  </ion-row>
-  <ion-row>
-    <p>{{ direccion }}</p>
-  </ion-row>
-  <ion-list>
-    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+  <ion-card color="verde-card">
+    <ion-card-header>
+
+      <ion-avatar style="margin-bottom: 20px;">
+        <ion-img [src]="perfil"></ion-img>
+      </ion-avatar>
+      <ion-card-title><b>{{ nombre }} {{ apellidos }}</b></ion-card-title>
+      <ion-card-subtitle>{{ correoElectronico }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>{{ nombreComuna }}</p>
+      <p>{{ direccion }}</p>
+      <ion-button color="verde-boton" slot="start" (click)="subirImagen()">
+        Subir imagen de perfil
+      </ion-button>
+      <ion-button color="verde-boton" slot="start" style="margin-bottom: 10px; margin-top: 15px;">
+        Actualizar datos personales
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-list color="fondo">
+    <ion-button fill="solid" color="verde-boton" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
       (click)="agregarProducto()">
       Agregar Producto
     </ion-button>
@@ -54,13 +55,13 @@
         <ion-text>
           <p>Cantidad de producto ofrecido: <b>{{ producto.CANTIDAD_PRODUCTO }}</b></p>
         </ion-text>
-        <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 10px;"
+        <ion-button fill="solid" color="verde-boton" slot="end" style="margin-bottom: 10px; margin-top: 10px;"
           (click)="editar(producto)">
           Editar
         </ion-button>
       </ion-label>
     </ion-item>
-    <ion-button fill="solid" color="tertiary" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
+    <ion-button fill="solid" color="verde-boton" slot="end" style="margin-bottom: 10px; margin-top: 20px;"
       (click)="cerrarSesion()">
       Cerrar sesión
     </ion-button>

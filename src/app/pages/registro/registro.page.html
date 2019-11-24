@@ -1,68 +1,70 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="verde-marco">
     <ion-buttons slot="start">
       <ion-back-button text="Regresar" defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>Registro</ion-title>
+    <ion-title><b>Registro</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <h1>Datos de Registro</h1>
-  <p>Complete este formulario para registrarse en Ferias Click.</p>
-  <form #formulario="ngForm" (ngSubmit)="registrar(formulario)">
-
-    <ion-row>
-      <ion-input placeholder="Ingrese su rut" [(ngModel)]="model.rut" type="text" name="rut" maxlength="12" required>
-      </ion-input>
-    </ion-row>
-    <ion-row>
-      <ion-input placeholder="Ingrese su nombre" [(ngModel)]="model.nombre" name="nombre" maxlength="200" required>
-      </ion-input>
-    </ion-row>
-    <ion-row>
-      <ion-input placeholder="Ingrese sus apellidos" [(ngModel)]="model.apellidos" name="apellidos" maxlength="300"
-        required></ion-input>
-    </ion-row>
-    <ion-row>
-      <ion-input placeholder="Ingrese un nombre de usuario" [(ngModel)]="model.nombreUsuario" name="nombre_usuario"
-        maxlength="100" required></ion-input>
-    </ion-row>
-    <ion-row>
-      <ion-input placeholder="Ingrese una clave" [(ngModel)]="model.clave" name="clave" type="password" maxlength="50"
-        required></ion-input>
-    </ion-row>
-    <ion-row>
-      <ion-input placeholder="Ingrese un correo electrónico" [(ngModel)]="model.correo" name="correo"
-        pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" maxlength="100" required></ion-input>
-    </ion-row>
-    <ion-list>
-      <ion-item>
-        <ion-select name="tipo_usuario" placeholder="Usuario" [(ngModel)]="model.tipoUsuario" maxwidth="100%" required>
-          <ion-select-option value="COMPRADOR">COMPRADOR/A</ion-select-option>
-          <ion-select-option value="COMERCIANTE">COMERCIANTE</ion-select-option>
-          <ion-select-option value="REPARTIDOR">REPARTIDOR/A</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
-    <ion-list>
-      <ion-item>
-        <ion-select name="idComuna" placeholder="Comuna" [(ngModel)]="model.idComuna" required>
-          <ion-select-option *ngFor="let comuna of comunas" value="{{ comuna.ID_COMUNA }}">{{ comuna.NOMBRE_COMUNA }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
-    <ion-row>
-      <ion-input name="direccion" placeholder="Ingrese su dirección" [(ngModel)]="model.direccion" maxlength="500"
-        required></ion-input>
-    </ion-row>
-    <ion-row class="top-20">
-      <ion-col>
-        <ion-button [disabled]="formulario.invalid" type="submit" fill="solid" expand="full" color="tertiary">
-          Registrar
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
+  <ion-card color="verde-card">
+    <ion-card-header>
+      <ion-card-title><b>Datos de Registro</b></ion-card-title>
+      <ion-card-subtitle>Complete este formulario para registrarse en Ferias Click</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <form #formulario="ngForm" (ngSubmit)="registrar(formulario)">
+      
+        <ion-row>
+          <ion-input placeholder="Ingrese su rut" [(ngModel)]="model.rut" type="text" name="rut" maxlength="12" required>
+          </ion-input>
+        </ion-row>
+        <ion-row>
+          <ion-input placeholder="Ingrese su nombre" [(ngModel)]="model.nombre" name="nombre" maxlength="200" required>
+          </ion-input>
+        </ion-row>
+        <ion-row>
+          <ion-input placeholder="Ingrese sus apellidos" [(ngModel)]="model.apellidos" name="apellidos" maxlength="300"
+            required></ion-input>
+        </ion-row>
+        <ion-row>
+          <ion-input placeholder="Ingrese un nombre de usuario" [(ngModel)]="model.nombreUsuario" name="nombre_usuario"
+            maxlength="100" required></ion-input>
+        </ion-row>
+        <ion-row>
+          <ion-input placeholder="Ingrese una clave" [(ngModel)]="model.clave" name="clave" type="password" maxlength="50"
+            required></ion-input>
+        </ion-row>
+        <ion-row>
+          <ion-input placeholder="Ingrese un correo electrónico" [(ngModel)]="model.correo" name="correo"
+            pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" maxlength="100" required></ion-input>
+        </ion-row>
+        <ion-row>
+          <ion-select name="tipo_usuario" placeholder="Usuario" [(ngModel)]="model.tipoUsuario" maxwidth="100%" required>
+            <ion-select-option value="COMPRADOR">COMPRADOR/A</ion-select-option>
+            <ion-select-option value="COMERCIANTE">COMERCIANTE</ion-select-option>
+            <ion-select-option value="REPARTIDOR">REPARTIDOR/A</ion-select-option>
+          </ion-select>
+        </ion-row>
+        <ion-row>
+          <ion-select name="idComuna" placeholder="Comuna" [(ngModel)]="model.idComuna" required>
+            <ion-select-option *ngFor="let comuna of comunas" value="{{ comuna.ID_COMUNA }}">{{ comuna.NOMBRE_COMUNA }}
+            </ion-select-option>
+          </ion-select>
+        </ion-row>
+        <ion-row>
+          <ion-input name="direccion" placeholder="Ingrese su dirección" [(ngModel)]="model.direccion" maxlength="500"
+            required></ion-input>
+        </ion-row>
+        <ion-row class="top-20">
+          <ion-col>
+            <ion-button [disabled]="formulario.invalid" type="submit" fill="solid" expand="full" color="verde-boton">
+              Registrar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

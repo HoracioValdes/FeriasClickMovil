@@ -24,3 +24,48 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.ion-color-verde-boton {
+    --ion-color-base: #339933;
+    --ion-color-base-rgb: 105,187,123;
+    --ion-color-contrast: #ffffff;
+    --ion-color-contrast-rgb: 255,255,255;
+    --ion-color-shade: #5ca56c;
+    --ion-color-tint: #78c288;
+}
+
+.ion-color-verde-marco {
+    --ion-color-base: #99CC00;
+    --ion-color-base-rgb: 105,187,123;
+    --ion-color-contrast: #ffffff;
+    --ion-color-contrast-rgb: 255,255,255;
+    --ion-color-shade: #5ca56c;
+    --ion-color-tint: #78c288;
+}
+
+.ion-color-verde-card {
+    --ion-color-base: #99CC66;
+    --ion-color-base-rgb: 105,187,123;
+    --ion-color-contrast: #ffffff;
+    --ion-color-contrast-rgb: 255,255,255;
+    --ion-color-shade: #5ca56c;
+    --ion-color-tint: #78c288;
+}
+
+.ion-color-verde-card-secundario {
+    --ion-color-base: #99CC99;
+    --ion-color-base-rgb: 105,187,123;
+    --ion-color-contrast: #ffffff;
+    --ion-color-contrast-rgb: 255,255,255;
+    --ion-color-shade: #5ca56c;
+    --ion-color-tint: #78c288;
+}
+
+.ion-color-fondo {
+    --ion-color-base: #ffffff;
+    --ion-color-base-rgb: 105,187,123;
+    --ion-color-contrast: #333333;
+    --ion-color-contrast-rgb: 255,255,255;
+    --ion-color-shade: #ffffff;
+    --ion-color-tint: #ffffff;
+}
